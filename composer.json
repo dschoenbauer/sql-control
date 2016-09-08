@@ -1,6 +1,7 @@
 {
-    "name": "ctimt/sql_control",
+    "name": "dschoenbauer/sql-control",
     "description": "sql version controller",
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^5.5 || ^7.0",
         "psr/log": "^1.0",
@@ -21,7 +22,7 @@
     "authors": [
         {
             "name": "David Schoenbauer",
-            "email": "dschoenbauer@coetruman.com"
+            "email": "dschoenbauer@gmail.com"
         }
     ]
 }
