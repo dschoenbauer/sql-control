@@ -1,10 +1,10 @@
-<?php namespace CTIMT\SqlControl\Listener\Logger;
+<?php namespace Dschoenbauer\SqlControl\Listener\Logger;
 
-use CTIMT\SqlControl\Enum\Messages;
+use Dschoenbauer\SqlControl\Enum\Messages;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
 /* 
- * Copyright (C) 2016 David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * Copyright (C) 2016 David Schoenbauer <dschoenbauer@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

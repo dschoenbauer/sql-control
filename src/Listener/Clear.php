@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2016 David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * Copyright (C) 2016 David Schoenbauer <dschoenbauer@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,18 +16,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-namespace CTIMT\SqlControl\Listener;
+namespace Dschoenbauer\SqlControl\Listener;
 
-use CTIMT\SqlControl\Enum\Attributes;
-use CTIMT\SqlControl\Enum\Events;
-use CTIMT\SqlControl\SqlControlManager;
-use CTIMT\SqlControl\Visitor\VisitorInterface;
+use Dschoenbauer\SqlControl\Enum\Attributes;
+use Dschoenbauer\SqlControl\Enum\Events;
+use Dschoenbauer\SqlControl\SqlControlManager;
+use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use Zend\EventManager\Event;
 
 /**
  * Clears identified sql files, both applied and pending execution
  *
- * @author David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
 class Clear implements VisitorInterface
 {
