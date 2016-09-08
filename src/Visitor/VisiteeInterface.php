@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2016 David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * Copyright (C) 2016 David Schoenbauer <dschoenbauer@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,11 +16,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-namespace CTIMT\SqlControl\Visitor;
+namespace Dschoenbauer\SqlControl\Visitor;
 
 /**
  *
- * @author David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
 interface VisiteeInterface
 {

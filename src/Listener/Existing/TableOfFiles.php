@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2016 David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * Copyright (C) 2016 David Schoenbauer <dschoenbauer@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,17 +16,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-namespace CTIMT\SqlControl\Listener\Existing;
+namespace Dschoenbauer\SqlControl\Listener\Existing;
 
-use CTIMT\SqlControl\Components\SqlChangeFactory;
-use CTIMT\SqlControl\Enum\Attributes;
-use CTIMT\SqlControl\Enum\Events;
-use CTIMT\SqlControl\Enum\Messages;
-use CTIMT\SqlControl\Parser\FileGroup;
-use CTIMT\SqlControl\Parser\FileVersion;
-use CTIMT\SqlControl\Parser\NullParser;
-use CTIMT\SqlControl\SqlControlManager;
-use CTIMT\SqlControl\Visitor\VisitorInterface;
+use Dschoenbauer\SqlControl\Components\SqlChangeFactory;
+use Dschoenbauer\SqlControl\Enum\Attributes;
+use Dschoenbauer\SqlControl\Enum\Events;
+use Dschoenbauer\SqlControl\Enum\Messages;
+use Dschoenbauer\SqlControl\Parser\FileGroup;
+use Dschoenbauer\SqlControl\Parser\FileVersion;
+use Dschoenbauer\SqlControl\Parser\NullParser;
+use Dschoenbauer\SqlControl\SqlControlManager;
+use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use PDO;
 use PDOException;
 use Zend\EventManager\Event;
@@ -34,12 +34,12 @@ use Zend\EventManager\Event;
 /**
  * Description of Table
  *
- * @author David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
 class TableOfFiles implements VisitorInterface
 {
 
-    use \CTIMT\SqlControl\Listener\SetupTrait;
+    use \Dschoenbauer\SqlControl\Listener\SetupTrait;
 
     private $_adapter;
     private $_table;

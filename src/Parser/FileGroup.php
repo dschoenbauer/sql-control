@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2016 David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * Copyright (C) 2016 David Schoenbauer <dschoenbauer@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,16 +16,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-namespace CTIMT\SqlControl\Parser;
+namespace Dschoenbauer\SqlControl\Parser;
 
 /**
  * Description of FileGroup
  *
- * @author David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
 class FileGroup implements ParseInterface
 {
-    public function Parse(\CTIMT\SqlControl\Components\SqlChange $sqlChange)
+    public function Parse(\Dschoenbauer\SqlControl\Components\SqlChange $sqlChange)
     {
         $fileName = $sqlChange->getName();
         preg_match('/^([\w-]+)/', $fileName, $matches);

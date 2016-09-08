@@ -1,14 +1,14 @@
-<?php namespace CTIMT\SqlControl;
+<?php namespace Dschoenbauer\SqlControl;
 
-use CTIMT\SqlControl\Components\Attributes;
-use CTIMT\SqlControl\Enum\Events;
-use CTIMT\SqlControl\Visitor\VisiteeInterface;
-use CTIMT\SqlControl\Visitor\VisitorInterface;
+use Dschoenbauer\SqlControl\Components\Attributes;
+use Dschoenbauer\SqlControl\Enum\Events;
+use Dschoenbauer\SqlControl\Visitor\VisiteeInterface;
+use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 
 /**
  * Description of SqlControlManager
  *
- * @author David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
 class SqlControlManager implements VisiteeInterface
 {

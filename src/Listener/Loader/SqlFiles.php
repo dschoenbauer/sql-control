@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2016 David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * Copyright (C) 2016 David Schoenbauer <dschoenbauer@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,24 +16,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-namespace CTIMT\SqlControl\Listener\Loader;
+namespace Dschoenbauer\SqlControl\Listener\Loader;
 
-use CTIMT\SqlControl\Components\SqlChangeFactory;
-use CTIMT\SqlControl\Enum\Attributes;
-use CTIMT\SqlControl\Enum\Events;
-use CTIMT\SqlControl\Enum\Messages;
-use CTIMT\SqlControl\Exception\InvalidArgumentException;
-use CTIMT\SqlControl\Parser\FileGroup;
-use CTIMT\SqlControl\Parser\FileSqlStatements;
-use CTIMT\SqlControl\Parser\FileVersion;
-use CTIMT\SqlControl\SqlControlManager;
-use CTIMT\SqlControl\Visitor\VisitorInterface;
+use Dschoenbauer\SqlControl\Components\SqlChangeFactory;
+use Dschoenbauer\SqlControl\Enum\Attributes;
+use Dschoenbauer\SqlControl\Enum\Events;
+use Dschoenbauer\SqlControl\Enum\Messages;
+use Dschoenbauer\SqlControl\Exception\InvalidArgumentException;
+use Dschoenbauer\SqlControl\Parser\FileGroup;
+use Dschoenbauer\SqlControl\Parser\FileSqlStatements;
+use Dschoenbauer\SqlControl\Parser\FileVersion;
+use Dschoenbauer\SqlControl\SqlControlManager;
+use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use Zend\EventManager\Event;
 
 /**
  * Description of SqlFiles
  *
- * @author David Schoenbauer <d.schoenbauer@ctimeetingtech.com>
+ * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
 class SqlFiles implements VisitorInterface
 {

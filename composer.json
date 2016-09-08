@@ -9,13 +9,13 @@
     },
     "autoload": {
         "psr-4": {
-            "CTIMT\\SqlControl\\": "src/"
+            "Dschoenbauer\\SqlControl\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CTIMTTest\\SqlControl\\": "test/",
-            "CTIMTBench\\SqlControl\\": "benchmarks/"
+            "DschoenbauerTest\\SqlControl\\": "test/",
+            "DschoenbauerBench\\SqlControl\\": "benchmarks/"
         }
     },
     "authors": [
