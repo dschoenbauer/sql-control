@@ -1,0 +1,27 @@
+{
+    "name": "ctimt/sql_control",
+    "description": "sql version controller",
+    "require": {
+        "php": "^5.5 || ^7.0",
+        "psr/log": "^1.0",
+        "zendframework/zend-eventmanager": "^3.0",
+        "phing/phing": "2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "CTIMT\\SqlControl\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CTIMTTest\\SqlControl\\": "test/",
+            "CTIMTBench\\SqlControl\\": "benchmarks/"
+        }
+    },
+    "authors": [
+        {
+            "name": "David Schoenbauer",
+            "email": "dschoenbauer@coetruman.com"
+        }
+    ]
+}
