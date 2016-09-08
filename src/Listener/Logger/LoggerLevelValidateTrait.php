@@ -1,4 +1,5 @@
-<?php namespace Dschoenbauer\SqlControl\Listener\Logger;
+<?php
+namespace Dschoenbauer\SqlControl\Listener\Logger;
 
 use Dschoenbauer\SqlControl\Enum\Messages;
 use Psr\Log\InvalidArgumentException;

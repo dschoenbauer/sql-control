@@ -1,4 +1,5 @@
-<?php namespace Dschoenbauer\SqlControl;
+<?php
+namespace Dschoenbauer\SqlControl;
 
 use Dschoenbauer\SqlControl\Components\Attributes;
 use Dschoenbauer\SqlControl\Enum\Events;
