@@ -1,4 +1,5 @@
 <?php
+namespace Dschoenbauer\SqlControl\Status;
 
 /**
  *

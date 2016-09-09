@@ -49,12 +49,15 @@ class Execute implements VisitorInterface
                     continue;
                 }
                 if ($noErrors) {
+                    $adapter->beginTransaction();
                     $this->executeSql($adapter, $version->getStatements());
                     $version->setStatus(new Success());
+                    $adapter->commit();
                 }else{
                     $version->setStatus(new Skipped());
                 }
             } catch (Exception $exc) {
+                $adapter->rollBack();
                 $noErrors = false;
                 $version->setStatus(new Fail());
                 $version->getAttributes()->add('error', ' - ' . $exc->getMessage());

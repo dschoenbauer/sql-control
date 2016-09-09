@@ -65,7 +65,7 @@ class TableOfFiles implements VisitorInterface
         /* @var $scm SqlControlManager */
         $scm = $event->getTarget();
         $file = $event->getParam('file');
-        $success = (bool) $event->getParam('success');
+        $success = (bool) $event->getParam('success') ? 1 : 0;
         if ($file !== null) {
             $sql = sprintf("INSERT INTO %s (%s, %s) VALUES(:file, :success)", $this->getTable(), $this->getFieldScriptName(), $this->getFieldSuccess());
             $stmt = $scm->getAdapter()->prepare($sql);
