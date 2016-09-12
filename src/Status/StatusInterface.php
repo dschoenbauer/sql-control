@@ -1,5 +1,5 @@
 <?php
-
+namespace Dschoenbauer\SqlControl\Status;
 /**
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
