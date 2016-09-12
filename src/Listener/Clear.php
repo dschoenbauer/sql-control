@@ -3,7 +3,7 @@ namespace Dschoenbauer\SqlControl\Listener;
 
 use Dschoenbauer\SqlControl\Enum\Attributes;
 use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\SqlControlManager;
+use Dschoenbauer\SqlControl\Components\SqlControlManager;
 use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use Zend\EventManager\Event;
 

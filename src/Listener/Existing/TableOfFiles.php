@@ -8,7 +8,7 @@ use Dschoenbauer\SqlControl\Enum\Messages;
 use Dschoenbauer\SqlControl\Parser\FileGroup;
 use Dschoenbauer\SqlControl\Parser\FileVersion;
 use Dschoenbauer\SqlControl\Parser\NullParser;
-use Dschoenbauer\SqlControl\SqlControlManager;
+use Dschoenbauer\SqlControl\Components\SqlControlManager;
 use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use PDO;
 use PDOException;
@@ -65,7 +65,7 @@ class TableOfFiles implements VisitorInterface
         /* @var $scm SqlControlManager */
         $scm = $event->getTarget();
         $file = $event->getParam('file');
-        $success = (bool) $event->getParam('success');
+        $success = (bool) $event->getParam('success') ? 1 : 0;
         if ($file !== null) {
             $sql = sprintf("INSERT INTO %s (%s, %s) VALUES(:file, :success)", $this->getTable(), $this->getFieldScriptName(), $this->getFieldSuccess());
             $stmt = $scm->getAdapter()->prepare($sql);

@@ -6,7 +6,7 @@ use Dschoenbauer\SqlControl\Components\SqlChange;
 use Dschoenbauer\SqlControl\Enum\Attributes;
 use Dschoenbauer\SqlControl\Enum\Events;
 use Dschoenbauer\SqlControl\Enum\Messages;
-use Dschoenbauer\SqlControl\SqlControlManager;
+use Dschoenbauer\SqlControl\Components\SqlControlManager;
 use Dschoenbauer\SqlControl\Status\Depreciated;
 use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use Zend\EventManager\Event;

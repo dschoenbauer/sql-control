@@ -9,7 +9,7 @@ use Dschoenbauer\SqlControl\Exception\InvalidArgumentException;
 use Dschoenbauer\SqlControl\Parser\FileGroup;
 use Dschoenbauer\SqlControl\Parser\FileSqlStatements;
 use Dschoenbauer\SqlControl\Parser\FileVersion;
-use Dschoenbauer\SqlControl\SqlControlManager;
+use Dschoenbauer\SqlControl\Components\SqlControlManager;
 use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use Zend\EventManager\Event;
 
