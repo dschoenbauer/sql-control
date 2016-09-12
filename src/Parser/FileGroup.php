@@ -1,5 +1,6 @@
-<?php
-namespace Dschoenbauer\SqlControl\Parser;
+<?php namespace Dschoenbauer\SqlControl\Parser;
+
+use Dschoenbauer\SqlControl\Components\SqlChange;
 
 /**
  * Description of FileGroup
@@ -8,11 +9,11 @@ namespace Dschoenbauer\SqlControl\Parser;
  */
 class FileGroup implements ParseInterface
 {
-    public function Parse(\Dschoenbauer\SqlControl\Components\SqlChange $sqlChange)
+
+    public function Parse(SqlChange $sqlChange)
     {
         $fileName = $sqlChange->getName();
         preg_match('/^([\w-]+)/', $fileName, $matches);
-        $group = array_pop($matches);
-        return $group;
+        return array_pop($matches);
     }
 }

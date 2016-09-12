@@ -41,21 +41,21 @@ class Execute implements VisitorInterface
     private function executeGroup(SqlGroup $group, PDO $adapter)
     {
         $versions = $group->getSqlChanges();
-        $noErrors = true;
+        $hasErrors = false;
         /* @var $version SqlChange */
         foreach ($versions as $version) {
             try {
                 if(!$version->getStatus()->isPendingLoad()){
                     continue;
                 }
-                if ($noErrors) {
+                if (!$hasErrors) {
                     $this->executeSql($adapter, $version->getStatements());
                     $version->setStatus(new Success());
                 }else{
                     $version->setStatus(new Skipped());
                 }
             } catch (Exception $exc) {
-                $noErrors = false;
+                $hasErrors = true;
                 $version->setStatus(new Fail());
                 $version->getAttributes()->add('error', ' - ' . $exc->getMessage());
             }
