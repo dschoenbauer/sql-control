@@ -1,12 +1,12 @@
 <?php
 namespace Dschoenbauer\SqlControl\Listener;
 
-use Dschoenbauer\SqlControl\Components\SqlGroup;
-use Dschoenbauer\SqlControl\Components\SqlChange;
+use Dschoenbauer\SqlControl\Framework\SqlGroup;
+use Dschoenbauer\SqlControl\Framework\SqlChange;
 use Dschoenbauer\SqlControl\Enum\Attributes;
 use Dschoenbauer\SqlControl\Enum\Events;
 use Dschoenbauer\SqlControl\Enum\Messages;
-use Dschoenbauer\SqlControl\Components\SqlControlManager;
+use Dschoenbauer\SqlControl\Framework\SqlControlManager;
 use Dschoenbauer\SqlControl\Status\Loaded;
 use Dschoenbauer\SqlControl\Status\PendingLoad;
 use Dschoenbauer\SqlControl\Visitor\VisitorInterface;

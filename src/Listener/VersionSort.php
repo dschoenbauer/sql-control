@@ -1,11 +1,11 @@
 <?php
 namespace Dschoenbauer\SqlControl\Listener;
 
-use Dschoenbauer\SqlControl\Components\SqlGroup;
+use Dschoenbauer\SqlControl\Framework\SqlGroup;
 use Dschoenbauer\SqlControl\Enum\Attributes;
 use Dschoenbauer\SqlControl\Enum\Events;
 use Dschoenbauer\SqlControl\Enum\Messages;
-use Dschoenbauer\SqlControl\Components\SqlControlManager;
+use Dschoenbauer\SqlControl\Framework\SqlControlManager;
 use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use Zend\EventManager\Event;
 

@@ -1,14 +1,14 @@
 <?php
 namespace Dschoenbauer\SqlControl\Listener\Existing;
 
-use Dschoenbauer\SqlControl\Components\SqlChangeFactory;
+use Dschoenbauer\SqlControl\Framework\SqlChangeFactory;
 use Dschoenbauer\SqlControl\Enum\Attributes;
 use Dschoenbauer\SqlControl\Enum\Events;
 use Dschoenbauer\SqlControl\Enum\Messages;
 use Dschoenbauer\SqlControl\Parser\FileGroup;
 use Dschoenbauer\SqlControl\Parser\FileVersion;
 use Dschoenbauer\SqlControl\Parser\NullParser;
-use Dschoenbauer\SqlControl\Components\SqlControlManager;
+use Dschoenbauer\SqlControl\Framework\SqlControlManager;
 use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use PDO;
 use PDOException;

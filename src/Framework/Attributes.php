@@ -1,5 +1,5 @@
 <?php
-namespace Dschoenbauer\SqlControl\Components;
+namespace Dschoenbauer\SqlControl\Framework;
 
 /**
  * Description of Attributed
@@ -30,7 +30,7 @@ class Attributes
      * 
      * @param string $key
      * @param mixed $defaultValue
-     * @return \Dschoenbauer\SqlControl\Components\Attribute
+     * @return \Dschoenbauer\SqlControl\Framework\Attribute
      */
     public function getAttribute($key, $defaultValue = null)
     {

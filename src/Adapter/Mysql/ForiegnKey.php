@@ -2,7 +2,7 @@
 namespace Dschoenbauer\SqlControl\Adapter\Mysql;
 
 use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\Components\SqlControlManager;
+use Dschoenbauer\SqlControl\Framework\SqlControlManager;
 use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use Zend\EventManager\Event;
 

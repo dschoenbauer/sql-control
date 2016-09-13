@@ -1,5 +1,5 @@
 <?php
-namespace Dschoenbauer\SqlControl\Components;
+namespace Dschoenbauer\SqlControl\Framework;
 
 /**
  * Description of SqlGroup

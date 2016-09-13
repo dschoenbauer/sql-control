@@ -1,7 +1,7 @@
 <?php
 namespace Dschoenbauer\SqlControl\Visitor;
 
-use Dschoenbauer\SqlControl\Components\SqlControlManager;
+use Dschoenbauer\SqlControl\Framework\SqlControlManager;
 
 /**
  *

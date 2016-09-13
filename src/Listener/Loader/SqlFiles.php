@@ -1,7 +1,7 @@
 <?php
 namespace Dschoenbauer\SqlControl\Listener\Loader;
 
-use Dschoenbauer\SqlControl\Components\SqlChangeFactory;
+use Dschoenbauer\SqlControl\Framework\SqlChangeFactory;
 use Dschoenbauer\SqlControl\Enum\Attributes;
 use Dschoenbauer\SqlControl\Enum\Events;
 use Dschoenbauer\SqlControl\Enum\Messages;
@@ -9,7 +9,7 @@ use Dschoenbauer\SqlControl\Exception\InvalidArgumentException;
 use Dschoenbauer\SqlControl\Parser\FileGroup;
 use Dschoenbauer\SqlControl\Parser\FileSqlStatements;
 use Dschoenbauer\SqlControl\Parser\FileVersion;
-use Dschoenbauer\SqlControl\Components\SqlControlManager;
+use Dschoenbauer\SqlControl\Framework\SqlControlManager;
 use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
 use Zend\EventManager\Event;
 

@@ -1,7 +1,7 @@
 <?php
-namespace Dschoenbauer\SqlControl\Components;
+namespace Dschoenbauer\SqlControl\Framework;
 
-use Dschoenbauer\SqlControl\Components\Attributes;
+use Dschoenbauer\SqlControl\Framework\Attributes;
 use Dschoenbauer\SqlControl\Enum\Events;
 use Dschoenbauer\SqlControl\Visitor\VisiteeInterface;
 use Dschoenbauer\SqlControl\Visitor\VisitorInterface;

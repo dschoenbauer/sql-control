@@ -2,7 +2,7 @@
 namespace Dschoenbauer\SqlControl\Listener;
 
 use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\Components\SqlControlManager;
+use Dschoenbauer\SqlControl\Framework\SqlControlManager;
 use Exception;
 
 /**

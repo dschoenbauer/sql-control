@@ -1,7 +1,7 @@
 <?php
 namespace Dschoenbauer\SqlControl\Parser;
 
-use Dschoenbauer\SqlControl\Components\SqlChange;
+use Dschoenbauer\SqlControl\Framework\SqlChange;
 use Dschoenbauer\SqlControl\Enum\Attributes;
 
 /**
