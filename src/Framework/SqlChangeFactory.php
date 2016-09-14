@@ -20,6 +20,11 @@ class SqlChangeFactory
         $this->setVersionParser($versionParser)->setGroupParser($groupParser)->setSqlParser($sqlParser);
     }
 
+    /**
+     * @param string $fileName
+     * @param string $path
+     * @return SqlChange
+     */
     public function getSqlChange($fileName, $path)
     {
         $sqlChange = new SqlChange();

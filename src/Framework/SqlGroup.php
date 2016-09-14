@@ -28,17 +28,12 @@ class SqlGroup
         $origVersion = $this->getCurrentVersion();
         $currentVersion = version_compare($newVersion, $origVersion) == 1 ? $newVersion : $origVersion;
         $this->setCurrentVersion($currentVersion);
+        return $this;
     }
 
     public function setCurrentVersion($currentVersion)
     {
         $this->_currentVersion = $currentVersion;
-        return $this;
-    }
-
-    public function setSqlChanges(array $sqlChanges)
-    {
-        $this->_sqlChanges = $sqlChanges;
         return $this;
     }
 

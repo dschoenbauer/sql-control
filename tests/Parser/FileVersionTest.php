@@ -17,7 +17,7 @@ class FileVersionTest  extends \DschoenbauerTest\SqlControl\Parser\TestParser
      */
     protected function setUp()
     {
-        $this->object = new FileVersion;
+        $this->object = new FileVersion();
     }
 
     public function testParse()

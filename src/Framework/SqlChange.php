@@ -66,7 +66,7 @@ class SqlChange
         return $this;
     }
 
-    public function setAttributes($attributes)
+    protected function setAttributes($attributes)
     {
         $this->_attributes = $attributes;
         return $this;
@@ -102,7 +102,7 @@ class SqlChange
         return $this->_status;
     }
 
-    public function setStatus($status)
+    public function setStatus(StatusInterface $status)
     {
         $this->_status = $status;
         return $this;

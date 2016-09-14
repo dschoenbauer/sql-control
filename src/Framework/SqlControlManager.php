@@ -33,7 +33,7 @@ class SqlControlManager implements VisiteeInterface
         return $this->_attributes;
     }
 
-    public function setAttributes(Attributes $attributes)
+    protected function setAttributes(Attributes $attributes)
     {
         $this->_attributes = $attributes;
         return $this;
