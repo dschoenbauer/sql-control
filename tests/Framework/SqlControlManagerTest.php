@@ -57,9 +57,13 @@ class SqlControlManagerTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(PDO::class, $this->object->setAdapter(new \DschoenbauerTest\SqlControl\Mocks\MockPdo())->getAdapter());
     }
 
+    public function testEventManager(){
+        
+    }
+    
     public function testUpdate()
     {
-        // Remove the following lines when you implement this test.
+        $this->object->update();
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
         );
