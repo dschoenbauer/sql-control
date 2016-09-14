@@ -1,5 +1,5 @@
 <?php
-namespace Dschoenbauer\SqlControl\Enum;
+namespace Ctimt\SqlControl\Enum;
 
 /**
  * Description of Messages

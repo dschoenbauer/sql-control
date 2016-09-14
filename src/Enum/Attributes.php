@@ -1,5 +1,5 @@
 <?php
-namespace Dschoenbauer\SqlControl\Enum;
+namespace Ctimt\SqlControl\Enum;
 
 /**
  * Description of Attributes
@@ -8,6 +8,7 @@ namespace Dschoenbauer\SqlControl\Enum;
  */
 class Attributes
 {
+    const TARGET_DATABASE = 'targetDatavase';
     const ORIGINAL_SQL_STATEMENT = 'originalSqlStatement';
     const SQL_VERSIONS = "sqlChanges";
     const APPLIED_SQL_VERSIONS = "appliedSqlChanges";

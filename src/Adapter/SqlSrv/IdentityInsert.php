@@ -28,20 +28,34 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-namespace CtimtTest\SqlControl\Mocks;
+namespace Ctimt\SqlControl\Adapter\SqlSrv;
 
-use PDO;
+use Ctimt\SqlControl\Enum\Attributes;
+use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Visitor\VisitorInterface;
+use Zend\EventManager\Event;
 
 /**
- * Description of MockPdo
+ * Description of IdentityInsert
  *
  * @author Bruce Schubert
  */
-class MockPdo extends PDO
+class IdentityInsert implements VisitorInterface
 {
 
-    public function __construct()
+    public function visitSqlControlManager(SqlControlManager $sqlControlManager)
     {
-        
+        $sqlControlManager->getEventManager()->attach(Events::LOAD, [$this, 'onLoad']);
     }
+
+    public function onLoad(Event $event)
+    {
+        $database = $event->getTarget()->getAttributes()->getValue(Attributes::TARGET_DATABASE,null);
+        if(!$database){
+            
+        }
+        $event->getTarget()->getAdapter()->exec(sprintf('SET IDENTITY_INSERT %s ON',$database));
+    }
+
 }

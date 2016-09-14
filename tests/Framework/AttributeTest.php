@@ -1,6 +1,6 @@
-<?php namespace DschoenbauerTest\SqlControl\Framework;
+<?php namespace CtimtTest\SqlControl\Framework;
 
-use Dschoenbauer\SqlControl\Framework\Attribute;
+use Ctimt\SqlControl\Framework\Attribute;
 use PHPUnit_Framework_TestCase;
 
 /**

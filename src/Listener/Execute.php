@@ -1,15 +1,15 @@
 <?php
-namespace Dschoenbauer\SqlControl\Listener;
+namespace Ctimt\SqlControl\Listener;
 
-use Dschoenbauer\SqlControl\Framework\SqlChange;
-use Dschoenbauer\SqlControl\Framework\SqlControlManager;
-use Dschoenbauer\SqlControl\Framework\SqlGroup;
-use Dschoenbauer\SqlControl\Enum\Attributes;
-use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\Status\Fail;
-use Dschoenbauer\SqlControl\Status\Skipped;
-use Dschoenbauer\SqlControl\Status\Success;
-use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
+use Ctimt\SqlControl\Framework\SqlChange;
+use Ctimt\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Framework\SqlGroup;
+use Ctimt\SqlControl\Enum\Attributes;
+use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Status\Fail;
+use Ctimt\SqlControl\Status\Skipped;
+use Ctimt\SqlControl\Status\Success;
+use Ctimt\SqlControl\Visitor\VisitorInterface;
 use Exception;
 use PDO;
 use Zend\EventManager\Event;

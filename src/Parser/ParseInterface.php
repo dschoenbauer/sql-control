@@ -1,7 +1,7 @@
 <?php
-namespace Dschoenbauer\SqlControl\Parser;
+namespace Ctimt\SqlControl\Parser;
 
-use Dschoenbauer\SqlControl\Framework\SqlChange;
+use Ctimt\SqlControl\Framework\SqlChange;
 
 /**
  *

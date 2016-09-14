@@ -1,14 +1,14 @@
 <?php
-namespace Dschoenbauer\SqlControl\Listener;
+namespace Ctimt\SqlControl\Listener;
 
-use Dschoenbauer\SqlControl\Framework\SqlGroup;
-use Dschoenbauer\SqlControl\Framework\SqlChange;
-use Dschoenbauer\SqlControl\Enum\Attributes;
-use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\Enum\Messages;
-use Dschoenbauer\SqlControl\Framework\SqlControlManager;
-use Dschoenbauer\SqlControl\Status\Depreciated;
-use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
+use Ctimt\SqlControl\Framework\SqlGroup;
+use Ctimt\SqlControl\Framework\SqlChange;
+use Ctimt\SqlControl\Enum\Attributes;
+use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Enum\Messages;
+use Ctimt\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Status\Depreciated;
+use Ctimt\SqlControl\Visitor\VisitorInterface;
 use Zend\EventManager\Event;
 
 /**

@@ -1,10 +1,10 @@
 <?php
-namespace Dschoenbauer\SqlControl\Framework;
+namespace Ctimt\SqlControl\Framework;
 
-use Dschoenbauer\SqlControl\Framework\Attributes;
-use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\Visitor\VisiteeInterface;
-use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
+use Ctimt\SqlControl\Framework\Attributes;
+use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Visitor\VisiteeInterface;
+use Ctimt\SqlControl\Visitor\VisitorInterface;
 use PDO;
 
 /**

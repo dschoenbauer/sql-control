@@ -1,8 +1,8 @@
-<?php namespace DschoenbauerTest\SqlControl\Framework;
+<?php namespace CtimtTest\SqlControl\Framework;
 
-use Dschoenbauer\SqlControl\Framework\Attributes;
-use Dschoenbauer\SqlControl\Framework\SqlControlManager;
-use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
+use Ctimt\SqlControl\Framework\Attributes;
+use Ctimt\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Visitor\VisitorInterface;
 use PDO;
 use PHPUnit_Framework_Assert;
 use PHPUnit_Framework_TestCase;
@@ -54,7 +54,7 @@ class SqlControlManagerTest extends PHPUnit_Framework_TestCase
 
     public function testAdapter()
     {
-        $this->assertInstanceOf(PDO::class, $this->object->setAdapter(new \DschoenbauerTest\SqlControl\Mocks\MockPdo())->getAdapter());
+        $this->assertInstanceOf(PDO::class, $this->object->setAdapter(new \CtimtTest\SqlControl\Mocks\MockPdo())->getAdapter());
     }
 
     public function testEventManager(){

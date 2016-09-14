@@ -1,6 +1,6 @@
-<?php namespace Dschoenbauer\SqlControl\Parser;
+<?php namespace Ctimt\SqlControl\Parser;
 
-use Dschoenbauer\SqlControl\Framework\SqlChange;
+use Ctimt\SqlControl\Framework\SqlChange;
 
 /**
  * Description of FileGroup

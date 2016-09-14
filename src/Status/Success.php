@@ -1,5 +1,5 @@
 <?php
-namespace Dschoenbauer\SqlControl\Status;
+namespace Ctimt\SqlControl\Status;
 
 /**
  * Description of Success

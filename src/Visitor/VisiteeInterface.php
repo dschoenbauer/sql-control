@@ -1,5 +1,5 @@
 <?php
-namespace Dschoenbauer\SqlControl\Visitor;
+namespace Ctimt\SqlControl\Visitor;
 
 /**
  *

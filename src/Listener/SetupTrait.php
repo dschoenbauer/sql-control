@@ -1,8 +1,8 @@
 <?php
-namespace Dschoenbauer\SqlControl\Listener;
+namespace Ctimt\SqlControl\Listener;
 
-use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Framework\SqlControlManager;
 use Exception;
 
 /**
@@ -16,6 +16,7 @@ trait SetupTrait
     public function setup(Exception $exc, SqlControlManager $sqlControlManager)
     {
         $errorEvents = [
+            "08004" => Events::SETUP_DATABASE, //MSSQL
             "42000" => Events::SETUP_DATABASE,
             "3D000" => Events::SETUP_DATABASE,
             "42S02" => Events::SETUP_TABLE, 

@@ -1,7 +1,7 @@
 <?php
-namespace Dschoenbauer\SqlControl\Listener\Logger;
+namespace Ctimt\SqlControl\Listener\Logger;
 
-use Dschoenbauer\SqlControl\Enum\Messages;
+use Ctimt\SqlControl\Enum\Messages;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
 /* 

@@ -1,11 +1,11 @@
-<?php
-namespace Dschoenbauer\SqlControl\Listener;
+<?php namespace Ctimt\SqlControl\Listener;
 
-use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\Enum\Messages;
-use Dschoenbauer\SqlControl\Exception\InvalidArgumentException;
-use Dschoenbauer\SqlControl\Framework\SqlControlManager;
-use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
+use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Enum\Messages;
+use Ctimt\SqlControl\Exception\InvalidArgumentException;
+use Ctimt\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Visitor\VisitorInterface;
+use PDO;
 use Zend\EventManager\Event;
 
 /**
@@ -30,9 +30,16 @@ class SetupDatabase implements VisitorInterface
 
     public function onSetup(Event $event)
     {
-        $sql = sprintf('CREATE DATABASE IF NOT EXISTS %s;', $this->getDatabaseName());
-        $event->getTarget()->getAdapter()->exec($sql);
-        $event->getTarget()->getEventManager()->trigger(Events::SETUP_TABLE,$event->getTarget());
+        /* @var $pdo PDO */
+        $pdo = $event->getTarget()->getAdapter();
+        $sqlTemplate = [
+            'dblib' => 'IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N\'%1$s\') CREATE DATABASE [%1$s]',
+            'sqlsrv' => 'IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N\'%1$s\') CREATE DATABASE [%1$s]',
+            'mysql' => 'CREATE DATABASE IF NOT EXISTS %s;'
+        ];
+        $sql = sprintf($sqlTemplate[$pdo->getAttribute(PDO::ATTR_DRIVER_NAME)], $this->getDatabaseName());
+        $pdo->exec($sql);
+        $event->getTarget()->getEventManager()->trigger(Events::SETUP_TABLE, $event->getTarget());
     }
 
     public function getDatabaseName()
@@ -42,7 +49,7 @@ class SetupDatabase implements VisitorInterface
 
     public function setDatabaseName($databaseName)
     {
-        if(!$databaseName){
+        if (!$databaseName) {
             throw new InvalidArgumentException(Messages::MISSING_DATABASE_NAME);
         }
         $this->_databaseName = $databaseName;

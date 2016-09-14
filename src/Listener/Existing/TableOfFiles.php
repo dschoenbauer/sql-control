@@ -1,15 +1,15 @@
 <?php
-namespace Dschoenbauer\SqlControl\Listener\Existing;
+namespace Ctimt\SqlControl\Listener\Existing;
 
-use Dschoenbauer\SqlControl\Framework\SqlChangeFactory;
-use Dschoenbauer\SqlControl\Enum\Attributes;
-use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\Enum\Messages;
-use Dschoenbauer\SqlControl\Parser\FileGroup;
-use Dschoenbauer\SqlControl\Parser\FileVersion;
-use Dschoenbauer\SqlControl\Parser\NullParser;
-use Dschoenbauer\SqlControl\Framework\SqlControlManager;
-use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
+use Ctimt\SqlControl\Framework\SqlChangeFactory;
+use Ctimt\SqlControl\Enum\Attributes;
+use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Enum\Messages;
+use Ctimt\SqlControl\Parser\FileGroup;
+use Ctimt\SqlControl\Parser\FileVersion;
+use Ctimt\SqlControl\Parser\NullParser;
+use Ctimt\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Visitor\VisitorInterface;
 use PDO;
 use PDOException;
 use Zend\EventManager\Event;
@@ -22,7 +22,7 @@ use Zend\EventManager\Event;
 class TableOfFiles implements VisitorInterface
 {
 
-    use \Dschoenbauer\SqlControl\Listener\SetupTrait;
+    use \Ctimt\SqlControl\Listener\SetupTrait;
 
     private $_adapter;
     private $_table;

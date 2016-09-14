@@ -1,5 +1,5 @@
 <?php
-namespace Dschoenbauer\SqlControl\Listener\Logger;
+namespace Ctimt\SqlControl\Listener\Logger;
 
 /**
  * Description of ToScreen

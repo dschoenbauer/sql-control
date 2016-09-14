@@ -13,12 +13,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Dschoenbauer\\SqlControl\\": "src/"
+            "Ctimt\\SqlControl\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DschoenbauerTest\\SqlControl\\": "tests/"
+            "CtimtTest\\SqlControl\\": "tests/"
         }
     },
     "authors": [

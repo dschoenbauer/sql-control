@@ -1,8 +1,8 @@
-<?php namespace DschoenbauerTest\SqlControl\Framework;
+<?php namespace CtimtTest\SqlControl\Framework;
 
-use Dschoenbauer\SqlControl\Framework\Attributes;
-use Dschoenbauer\SqlControl\Framework\SqlChange;
-use Dschoenbauer\SqlControl\Status\StatusInterface;
+use Ctimt\SqlControl\Framework\Attributes;
+use Ctimt\SqlControl\Framework\SqlChange;
+use Ctimt\SqlControl\Status\StatusInterface;
 use PHPUnit_Framework_TestCase;
 
 /**

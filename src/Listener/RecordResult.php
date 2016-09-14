@@ -1,9 +1,9 @@
 <?php
-namespace Dschoenbauer\SqlControl\Listener;
+namespace Ctimt\SqlControl\Listener;
 
-use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\Framework\SqlControlManager;
-use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
+use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Visitor\VisitorInterface;
 
 /**
  * Description of RecordResult

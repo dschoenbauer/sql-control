@@ -1,7 +1,7 @@
 <?php
-namespace Dschoenbauer\SqlControl\Framework;
+namespace Ctimt\SqlControl\Framework;
 
-use Dschoenbauer\SqlControl\Status\StatusInterface;
+use Ctimt\SqlControl\Status\StatusInterface;
 
 
 

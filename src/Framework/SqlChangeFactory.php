@@ -1,7 +1,7 @@
 <?php
-namespace Dschoenbauer\SqlControl\Framework;
+namespace Ctimt\SqlControl\Framework;
 
-use Dschoenbauer\SqlControl\Parser\ParseInterface;
+use Ctimt\SqlControl\Parser\ParseInterface;
 
 /**
  * Description of SqlChangeFactory
