@@ -22,6 +22,12 @@ class SqlGroup
     {
         return $this->_sqlChanges;
     }
+    
+    public function setSqlChanges($sqlChanges)
+    {
+        $this->_sqlChanges = $sqlChanges;
+        return $this;
+    }
 
     public function incrementVersion($newVersion)
     {

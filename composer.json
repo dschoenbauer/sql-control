@@ -1,5 +1,5 @@
 {
-    "name": "dschoenbauer/sql-control",
+    "name": "ctimt/sql-control",
     "description": "sql version controller",
     "license": "BSD-3-Clause",
     "require": {
@@ -24,7 +24,7 @@
     "authors": [
         {
             "name": "David Schoenbauer",
-            "email": "dschoenbauer@gmail.com"
+            "email": "d.schoenbauer@ctimeetingtech.com"
         }
     ]
 }

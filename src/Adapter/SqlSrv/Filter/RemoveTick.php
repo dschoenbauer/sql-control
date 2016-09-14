@@ -13,7 +13,7 @@
  *       notice, this list of conditions and the following disclaimer in the
  *       documentation and/or other materials provided with the distribution.
  *
- *     - Neither the name of David Schoenbauer, Ctimt nor the names of its 
+ *     - Neither the name of David Schoenbauer, Dschoenbauer nor the names of its 
  *       contributors may be used to endorse or promote products derived
  *       from this software without specific prior written permission.
  *
@@ -28,36 +28,14 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-namespace Ctimt\SqlControl\Adapter\SqlSrv;
-
-use Ctimt\SqlControl\Enum\Attributes;
-use Ctimt\SqlControl\Enum\Events;
-use Ctimt\SqlControl\Framework\SqlControlManager;
-use Ctimt\SqlControl\Visitor\VisitorInterface;
-use Zend\EventManager\Event;
+namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
 
 /**
- * Description of IdentityInsert
+ * Description of RemoveTick
  *
  * @author Bruce Schubert
  */
-class IdentityInsert implements VisitorInterface
+class RemoveTick implements Ctimt\SqlControl\Adapter\FilterInterface
 {
-
-    public function visitSqlControlManager(SqlControlManager $sqlControlManager)
-    {
-        $sqlControlManager->getEventManager()->attach(Events::LOAD, [$this, 'onLoad']);
-    }
-
-    public function onLoad(Event $event)
-    {
-        $database = $event->getTarget()->getAttributes()->getValue(Attributes::TARGET_DATABASE,null);
-        if(!$database){
-            throw new \Ctimt\SqlControl\Exception\InvalidArgumentException('No database specified');
-        }
-        $sql = sprintf('SET IDENTITY_INSERT dbo.%s ON',$database);
-        //print_r($sql);
-        //$event->getTarget()->getAdapter()->exec($sql);
-    }
-
+    //put your code here
 }
