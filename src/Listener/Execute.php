@@ -83,6 +83,7 @@ class Execute implements VisitorInterface
     private function executeSql(\PDO $adapter, $sqls)
     {
         foreach ($sqls as $sql) {
+            echo "$sql",PHP_EOL;
             $adapter->prepare($sql)->execute();
         }
     }

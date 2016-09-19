@@ -19,4 +19,5 @@ class Messages
     const INFO_VERSIONS_DEPRECIATED = "{count} pending file(s) Depreciated";
     const INFO_VERSIONS_ORDERED = "Ordered {count} file(s).";
 
+    const ERROR_CONFIG_KEY_NOT_FOUND = 'Key %s is not found in the config for %s or the default config.';
 }

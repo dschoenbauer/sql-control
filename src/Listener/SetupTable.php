@@ -1,7 +1,9 @@
 <?php
 namespace Ctimt\SqlControl\Listener;
 
+use Ctimt\SqlControl\Config\Configuration;
 use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Enum\Statements;
 use Ctimt\SqlControl\Framework\SqlControlManager;
 use Ctimt\SqlControl\Visitor\VisitorInterface;
 use Exception;
@@ -18,10 +20,14 @@ class SetupTable implements VisitorInterface
     private $table;
     private $fieldScriptName;
     private $fieldSuccess;
+    private $config;
 
-    public function __construct($table, $fieldScriptName, $fieldSuccess)
+    public function __construct($table, $fieldScriptName, $fieldSuccess, Configuration $config)
     {
-        $this->setTable($table)->setFieldScriptName($fieldScriptName)->setFieldSuccess($fieldSuccess);
+        $this->setTable($table)
+                ->setFieldScriptName($fieldScriptName)
+                ->setFieldSuccess($fieldSuccess)
+                ->setConfig($config);
     }
 
     public function visitSqlControlManager(SqlControlManager $sqlControlManager)
@@ -34,27 +40,26 @@ class SetupTable implements VisitorInterface
         /* @var $sqlControlManager SqlControlManager */
         $sqlControlManager = $event->getTarget();
         try {
-            $sqlControlManager->getAdapter()->exec($this->getCreateSql());
+            $sql = $this->getCreateSql();
+            $sqlControlManager->getAdapter()->exec($sql);
         } catch (Exception $exc) {
             $sqlControlManager
                 ->getEventManager()
                 ->trigger(Events::LOG_ERROR, $event->getTarget(), [
                     'exception' => $exc,
-                    'message' => 'Issues with creating table: {table}',
-                    'context' => ['table' => $this->getTable()]
+                    'message' => 'Issues with creating table: {table} \n  {sql}',
+                    'context' => ['table' => $this->getTable(),'sql'=>$sql]
             ]);
         }
     }
 
     private function getCreateSql()
     {
-        return sprintf('CREATE TABLE IF NOT EXISTS %s (
-                        id int(10) unsigned NOT NULL AUTO_INCREMENT,
-                        %s varchar(100) DEFAULT NULL,
-                        created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                        %s tinyint(1) DEFAULT \'0\',
-                        PRIMARY KEY (id)
-                      )', $this->getTable(), $this->getFieldScriptName(), $this->getFieldSuccess());
+        return sprintf(
+                $this->getConfig()->getValue(Statements::CREATE_TABLE), 
+                $this->getTable(), 
+                $this->getFieldScriptName(), 
+                $this->getFieldSuccess());
     }
 
     public function getTable()
@@ -87,6 +92,18 @@ class SetupTable implements VisitorInterface
     public function setFieldSuccess($fieldSuccess)
     {
         $this->fieldSuccess = $fieldSuccess;
+        return $this;
+    }
+    
+    /**
+     * @return Configuration
+     */
+    public function getConfig() {
+        return $this->config;
+    }
+
+    public function setConfig(Configuration $config) {
+        $this->config = $config;
         return $this;
     }
 }

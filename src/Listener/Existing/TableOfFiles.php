@@ -1,14 +1,16 @@
 <?php
 namespace Ctimt\SqlControl\Listener\Existing;
 
-use Ctimt\SqlControl\Framework\SqlChangeFactory;
+use Ctimt\SqlControl\Config\Configuration;
 use Ctimt\SqlControl\Enum\Attributes;
 use Ctimt\SqlControl\Enum\Events;
 use Ctimt\SqlControl\Enum\Messages;
+use Ctimt\SqlControl\Enum\Statements;
+use Ctimt\SqlControl\Framework\SqlChangeFactory;
+use Ctimt\SqlControl\Framework\SqlControlManager;
 use Ctimt\SqlControl\Parser\FileGroup;
 use Ctimt\SqlControl\Parser\FileVersion;
 use Ctimt\SqlControl\Parser\NullParser;
-use Ctimt\SqlControl\Framework\SqlControlManager;
 use Ctimt\SqlControl\Visitor\VisitorInterface;
 use PDO;
 use PDOException;
@@ -28,14 +30,16 @@ class TableOfFiles implements VisitorInterface
     private $_table;
     private $_fieldScriptName;
     private $_fieldSuccess;
+    private $_config;
 
-    public function __construct(\PDO $adapter, $table = 'VersionController', $fieldScriptName = 'VersionController_script', $fieldSuccess = 'VersionController_success')
+    public function __construct(\PDO $adapter, Configuration $config, $table = 'VersionController', $fieldScriptName = 'VersionController_script', $fieldSuccess = 'VersionController_success')
     {
         $this
             ->setAdapter($adapter)
             ->setTable($table)
             ->setFieldScriptName($fieldScriptName)
-            ->setFieldSuccess($fieldSuccess);
+            ->setFieldSuccess($fieldSuccess)
+            ->setConfig($config);
     }
 
     public function visitSqlControlManager(SqlControlManager $sqlControlManager)
@@ -80,7 +84,7 @@ class TableOfFiles implements VisitorInterface
 
     private function getSelectSql()
     {
-        return sprintf("SELECT %s from %s where %s = true", $this->getFieldScriptName(), $this->getTable(), $this->getFieldSuccess());
+        return sprintf($this->getConfig()->getValue(Statements::GET_EXECUTED_CHANGES), $this->getFieldScriptName(), $this->getTable(), $this->getFieldSuccess());
     }
 
     /**
@@ -139,4 +143,18 @@ class TableOfFiles implements VisitorInterface
             return [];
         }
     }
+    
+    /**
+     * 
+     * @return Configuration 
+     */
+    public function getConfig() {
+        return $this->_config;
+    }
+
+    public function setConfig(Configuration $config) {
+        $this->_config = $config;
+        return $this;
+    }
+    
 }

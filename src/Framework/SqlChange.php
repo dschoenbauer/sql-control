@@ -40,6 +40,15 @@ class SqlChange
         return $this->_statements;
     }
 
+    public function getStatement($id)
+    {
+        return $this->_statements[$id];
+    }
+    
+    public function setStatement($id, $value)
+    {
+        return $this->_statements[$id] = $value;
+    }
     /**
      * @return Attributes
      */
@@ -106,6 +115,10 @@ class SqlChange
     {
         $this->_status = $status;
         return $this;
+    }
+
+    public function addStatement($sql) {
+        $this->_statements[] = $sql;
     }
 
 }

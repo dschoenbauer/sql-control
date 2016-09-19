@@ -32,7 +32,7 @@ namespace Ctimt\SqlControl\Adapter;
 
 /**
  *
- * @author Bruce Schubert
+ * @author David Schoenbauer
  */
 interface FilterInterface
 {

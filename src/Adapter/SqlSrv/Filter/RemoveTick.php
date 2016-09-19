@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2016, David Schoenbauer <dschoenbauer@gmail.com>
  * All rights reserved.
@@ -28,14 +29,20 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
+
+use Ctimt\SqlControl\Adapter\FilterInterface;
 
 /**
  * Description of RemoveTick
  *
  * @author Bruce Schubert
  */
-class RemoveTick implements Ctimt\SqlControl\Adapter\FilterInterface
-{
-    //put your code here
+class RemoveTick implements FilterInterface {
+
+    public function filter($value) {
+        return str_replace('`', '', $value);
+    }
+
 }
