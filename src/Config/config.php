@@ -5,6 +5,7 @@ use Ctimt\SqlControl\Enum\Statements;
 
 return [
     Drivers::MYSQL => [
+        Statements::RESERVED_WORDS => [],
         Statements::CREATE_DATABASE => 'CREATE DATABASE IF NOT EXISTS %s;',
         Statements::CREATE_TABLE => 'CREATE TABLE IF NOT EXISTS %s (
                         id int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -16,6 +17,7 @@ return [
         Statements::GET_EXECUTED_CHANGES => 'SELECT %s from %s where %s = true'
     ],
     Drivers::DBLIB => [
+        Statements::RESERVED_WORDS => ['User', 'Profile','File'],
         Statements::CREATE_DATABASE => 'IF NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N\'%1$s\') CREATE DATABASE [%1$s]',
         Statements::CREATE_TABLE => 'CREATE TABLE %s (
                         id int NOT NULL IDENTITY,
@@ -27,6 +29,7 @@ return [
         Statements::GET_EXECUTED_CHANGES => 'SELECT %s from %s where %s = 1'
     ],
     Drivers::SQL_SRV => [
+        Statements::RESERVED_WORDS => ['User', 'Profile','File'],
         Statements::CREATE_DATABASE => 'IF NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N\'%1$s\') CREATE DATABASE [%1$s]',
         Statements::CREATE_TABLE => 'CREATE TABLE %s (
                         id int NOT NULL IDENTITY,

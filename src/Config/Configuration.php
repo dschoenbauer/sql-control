@@ -18,9 +18,11 @@ use Ctimt\SqlControl\Exception\InvalidArgumentException;
  */
 class Configuration {
 
+    const DEFAULT_NAMESPACE = 'default';
+    
     private $_config = [];
     private $_nameSpace = '';
-    private $_defaultNamespace = 'default';
+    private $_defaultNamespace = self::DEFAULT_NAMESPACE;
     private $_throwErrorOnNoValue = false;
 
     public function __construct(array $config, $nameSpace, $throwErrorOnNoValue = false) {

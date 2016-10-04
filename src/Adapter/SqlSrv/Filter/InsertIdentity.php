@@ -22,30 +22,20 @@ class InsertIdentity implements FilterInterface, SqlChangeAwareInterface {
     private $_SqlChange;
 
     public function filter($value) {
-        $pattern = "/insert\W+into\W+(\w+)(?:\W*\(([\w,]+)\))?/i";
+        $pattern = "/insert\W+into\W+(\w+)(?:\W*\(([\w, ]+)\))?/i";
         if (preg_match($pattern, $value, $matches) !== 1) {
             return $value;
         }
 
         $table = $matches[1];
         $fields = isset($matches[2]) ? $matches[2] : null;
-        $isIndexInPlayPattern = "/(id|" . $table . "[_-]?id)/i";
+        $isIndexInPlayPattern = "/([\( ]id|" . $table . "[_-]?id)/i";
         if (preg_match($isIndexInPlayPattern, $fields) !== 1) {
             return $value;
         }
 
         $sqlOn = sprintf("SET IDENTITY_INSERT dbo.[%s] ON;", $table);
         $sqlOff = sprintf("SET IDENTITY_INSERT dbo.[%s] OFF;", $table);
-        /*
-          if($this->getSqlChange()->getAttributes()->getValue(__CLASS__, false)){
-          return $value;
-          }
-          $statements = $this->getSqlChange()->getStatements();
-          $statements[] = $value;
-          $this->getSqlChange()->setStatements($statements);
-          $this->getSqlChange()->getAttributes()->add(__CLASS__, true);
-         * 
-         */
         return $sqlOn . $this->addSuffix($value, ";") . $sqlOff;
     }
 

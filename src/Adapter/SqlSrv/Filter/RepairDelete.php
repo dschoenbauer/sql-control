@@ -9,15 +9,15 @@
 namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
 
 /**
- * Description of RemoveFieldByFieldCharType
+ * Description of RepairDelete
  *
  * @author David
  */
-class RemoveFieldByFieldCharType implements \Ctimt\SqlControl\Adapter\FilterInterface {
-
+class RepairDelete implements \Ctimt\SqlControl\Adapter\FilterInterface{
+    
     public function filter($value) {
-        $pattern = '/CHAR(?:ACTER)?\W*SET\W+\w+\W|COLLATE\W+\w+\W/i';
-        return preg_replace($pattern, '', $value);
+        $pattern = "/DELETE\W+(\w+)\.\*/i";
+        return preg_replace($pattern, 'DELETE', $value);
     }
 
 }

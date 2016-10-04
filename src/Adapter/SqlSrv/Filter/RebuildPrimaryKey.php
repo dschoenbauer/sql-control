@@ -10,13 +10,14 @@ namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
 
 use Ctimt\SqlControl\Adapter\FilterInterface;
 use Ctimt\SqlControl\Framework\SqlChange;
+use Ctimt\SqlControl\Framework\SqlChangeAwareInterface;
 
 /**
  * Description of RebuildPrimaryKey
  *
  * @author David
  */
-class RebuildPrimaryKey implements FilterInterface, \Ctimt\SqlControl\Framework\SqlChangeAwareInterface {
+class RebuildPrimaryKey implements FilterInterface, SqlChangeAwareInterface {
 
     private $_sqlChange;
 

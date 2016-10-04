@@ -18,7 +18,7 @@ use Ctimt\SqlControl\Adapter\FilterInterface;
 class ConvertDouble implements FilterInterface {
 
     public function filter($value) {
-        return preg_replace('/double\(\d,\d\)/', 'FLOAT', $value);
+        return preg_replace('/double\(\d+,\d+\)/i', 'FLOAT', $value);
     }
 
 }

@@ -1,5 +1,6 @@
 <?php namespace CtimtTest\SqlControl\Framework;
 
+use Ctimt\SqlControl\Framework\SqlChange;
 use Ctimt\SqlControl\Framework\SqlGroup;
 use PHPUnit_Framework_TestCase;
 
@@ -28,13 +29,6 @@ class SqlGroupTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('0.0.0', $this->object->setCurrentVersion('0.0.0')->getCurrentVersion());
     }
 
-    public function testGetSqlChanges()
-    {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
     public function testIncrementVersionSuccess()
     {
         $this->assertEquals('0.0.1', $this->object
@@ -55,9 +49,14 @@ class SqlGroupTest extends PHPUnit_Framework_TestCase
 
     public function testAdd()
     {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $sqlChange = new SqlChange();
+        $this->object->add($sqlChange);
+        $this->assertEquals(1, count($this->object->getSqlChanges()));
+        $this->object->add($sqlChange);
+        $this->assertEquals(1, count($this->object->getSqlChanges()));
+        $sqlChange->setName('new');
+        $this->object->add($sqlChange);
+        $this->assertEquals(2, count($this->object->getSqlChanges()));
     }
 
     public function testGetName()

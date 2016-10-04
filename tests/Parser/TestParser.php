@@ -38,7 +38,7 @@ namespace CtimtTest\SqlControl\Parser;
 class TestParser extends \PHPUnit_Framework_TestCase
 {
 
-    const TARGET_CLASS = '\Ctimt\SqlControl\Components\SqlChange';
+    const TARGET_CLASS = '\Ctimt\SqlControl\Framework\SqlChange';
 
     protected function getBaseMock()
     {

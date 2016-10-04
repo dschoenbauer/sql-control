@@ -8,16 +8,19 @@
 
 namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
 
+use Ctimt\SqlControl\Adapter\FilterInterface;
+
 /**
- * Description of RemoveFieldByFieldCharType
+ * Description of ConvertDouble
  *
  * @author David
  */
-class RemoveFieldByFieldCharType implements \Ctimt\SqlControl\Adapter\FilterInterface {
+class ConvertDoubleQuote implements FilterInterface {
 
     public function filter($value) {
-        $pattern = '/CHAR(?:ACTER)?\W*SET\W+\w+\W|COLLATE\W+\w+\W/i';
-        return preg_replace($pattern, '', $value);
+        return preg_replace_callback('/\"([^\"]*)\"/', function($matches){
+            return "'" . str_replace("'","''",$matches[1]) . "'";
+        }, $value);
     }
 
 }

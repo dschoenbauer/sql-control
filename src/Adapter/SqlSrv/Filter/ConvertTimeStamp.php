@@ -18,8 +18,8 @@ use Ctimt\SqlControl\Adapter\FilterInterface;
 class ConvertTimeStamp implements FilterInterface {
 
     public function filter($value) {
-        $pattern = "/timestamp(?: NOT NULL)? DEFAULT CURRENT_TIMESTAMP( ON UPDATE CURRENT_TIMESTAMP)?(?: NOT NULL)?/i";
-        $replacement = 'DATETIME NOT NULL DEFAULT(GETDATE())';
+        $pattern = "/\Wtimestamp(?: NOT NULL)?( DEFAULT CURRENT_TIMESTAMP)?( ON UPDATE CURRENT_TIMESTAMP)?(?: NOT NULL)?/i";
+        $replacement = ' DATETIME DEFAULT(GETDATE())';
         return preg_replace($pattern, $replacement, $value);
     }
 

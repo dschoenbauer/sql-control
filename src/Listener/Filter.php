@@ -38,27 +38,34 @@ class Filter implements VisitorInterface {
     public function onGroup(Event $event) {
         $groups = $event->getTarget()->getAttributes()->getValue(Attributes::GROUPS, []);
         foreach ($groups as $group) {
-            $this->filterSQL($group);
+            $this->filterGroup($group);
         }
     }
 
-    private function filterSQL(SqlGroup $group) {
-        $filters = $this->_filters;
+    public function filterGroup(SqlGroup $group) {
         $sqlChanges = $group->getSqlChanges();
-        /* @var $sqlChange SqlChange */
         foreach ($sqlChanges as $sqlChange) {
-            for ($id = 0; $id < count($sqlChange->getStatements()); $id++) {
-                $sql = $sqlChange->getStatement($id);
-                /* @var $filters FilterInterface */
-                foreach ($filters as $filter) {
-                    if ($filter instanceof SqlChangeAwareInterface) {
-                        $filter->setSqlChange($sqlChange);
-                    }
-                    $sql = $filter->filter($sql);
-                }
-                $sqlChange->setStatement($id, $sql);
-            }
+            $this->filterSqlChange($sqlChange);
         }
+    }
+
+    public function filterSqlChange(SqlChange $sqlChange) {
+        for ($id = 0; $id < count($sqlChange->getStatements()); $id++) {
+            $this->filterStatement($sqlChange, $id);
+        }
+    }
+    
+    public function filterStatement(SqlChange $sqlChange, $id){
+        $filters = $this->_filters;
+        $sql = $sqlChange->getStatement($id);
+        /* @var $filters FilterInterface */
+        foreach ($filters as $filter) {
+            if ($filter instanceof SqlChangeAwareInterface) {
+                $filter->setSqlChange($sqlChange);
+            }
+            $sql = $filter->filter($sql);
+        }
+        $sqlChange->setStatement($id, $sql);        
     }
 
 }

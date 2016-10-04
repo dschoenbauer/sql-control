@@ -17,5 +17,6 @@ class Statements {
     const CREATE_DATABASE = 'createDatabase';
     const CREATE_TABLE = 'createTable';
     const GET_EXECUTED_CHANGES = "executedChanges";
+    const RESERVED_WORDS = 'reservedWords';
 
 }

@@ -1,14 +1,25 @@
 <?php
 
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\AlterAddColumn;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\AlterAddIndex;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\AlterChangeColumn;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\AlterDropColumn;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\AlterDropForeignKey;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\AlterDropIndex;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertBoolean;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertDouble;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertDoubleQuote;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertEnum;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConverTextEscapeChar;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertHashComments;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertInt;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertReplaceInto;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertTimeStamp;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\EscapeKeyWords;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\InsertIdentity;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\InsertOnDuplicateKey;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ManageCreateKeys;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ManageVarcharMax;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RebuildPrimaryKey;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveComments;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveConstraints;
@@ -16,12 +27,15 @@ use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveEngineSpecification;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveFieldByFieldCharType;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveTick;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveUnsigned;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RepairDelete;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ReplaceAutoIncrement;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ReplaceIf;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ReplaceNow;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RewiteIndexStatements;
 use Ctimt\SqlControl\Adapter\SqlSrv\IdentityInsert;
 use Ctimt\SqlControl\Config\Configuration;
 use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Enum\Statements;
 use Ctimt\SqlControl\Framework\SqlControlManager;
 use Ctimt\SqlControl\Listener\Clear;
 use Ctimt\SqlControl\Listener\Connection;
@@ -41,7 +55,9 @@ use Ctimt\SqlControl\Listener\SortVersion;
 
 include './vendor/autoload.php';
 try {
-    $database = "springs_local13";
+    $database = "springs_local_" . time();
+    echo "<pre>",$database;
+    
     $table = 'VersionController';
     $fieldScriptName = 'VersionController_script';
     $fieldSuccess = 'VersionController_success';
@@ -70,13 +86,19 @@ try {
     $controller->accept(new Filter([
         new RemoveTick(),
         new RemoveUnsigned(),
-        new ReplaceAutoIncrement(),
-        new ReplaceNow(),
-        new EscapeKeyWords(['User', 'Profile','File']),
         new ConvertDouble(),
+        new ConvertDoubleQuote(),
         new ConvertTimeStamp(),
         new ConvertBoolean(),
+        new ConvertEnum(),
         new ConvertInt(),
+        new ConvertReplaceInto(),
+        new ReplaceAutoIncrement(),
+        new RepairDelete(),
+        new ManageVarcharMax(),
+        new ReplaceNow(),
+        new ReplaceIf(),
+        new EscapeKeyWords($config->getValue(Statements::RESERVED_WORDS)),
         new ManageCreateKeys(),
         new RemoveEngineSpecification(),
         new RemoveFieldByFieldCharType(),
@@ -84,9 +106,16 @@ try {
         new RewiteIndexStatements(),
         new RebuildPrimaryKey(),
         new ConverTextEscapeChar(),
+        new ConvertHashComments(),
         new RemoveComments(),
         new InsertIdentity(),
+        new InsertOnDuplicateKey(),
+        new AlterDropIndex(),
+        new AlterDropForeignKey(),
+        new AlterDropColumn(),
         new AlterAddColumn(),
+        new AlterAddIndex(),
+        new AlterChangeColumn(),
     ]));
     $controller->accept(new Execute());
     $controller->update();

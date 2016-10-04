@@ -15,7 +15,7 @@ namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
  */
 class ReplaceIf implements \Ctimt\SqlControl\Adapter\FilterInterface{
     public function filter($value) {
-        return str_replace('IF(',"IIF(",$value);
+        return preg_replace('/IF\(/i',"IIF(",$value);
     }
 
 }

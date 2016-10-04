@@ -15,7 +15,8 @@ namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
  */
 class ReplaceAutoIncrement implements \Ctimt\SqlControl\Adapter\FilterInterface{
     public function filter($value) {
-        return str_replace('AUTO_INCREMENT', 'IDENTITY', $value);
+        $pattern = '/(NOT\W+NULL\W+)?AUTO_INCREMENT/i';
+        return preg_replace($pattern, 'IDENTITY', $value);
     }
 
 }
