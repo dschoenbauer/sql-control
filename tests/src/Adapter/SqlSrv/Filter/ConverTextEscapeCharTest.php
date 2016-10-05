@@ -12,31 +12,12 @@ class ConverTextEscapeCharTest extends \PHPUnit_Framework_TestCase {
      */
     protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
     protected function setUp() {
         $this->object = new ConverTextEscapeChar;
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown() {
-        
-    }
-
-    /**
-     * @covers Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConverTextEscapeChar::filter
-     * @todo   Implement testFilter().
-     */
     public function testFilter() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertEquals("This is a ''test''",$this->object->filter("This is a \\'test\\'"));
     }
 
 }

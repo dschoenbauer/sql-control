@@ -12,31 +12,18 @@ class ConvertBooleanTest extends \PHPUnit_Framework_TestCase {
      */
     protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
     protected function setUp() {
         $this->object = new ConvertBoolean;
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown() {
-        
-    }
-
-    /**
-     * @covers Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertBoolean::filter
-     * @todo   Implement testFilter().
-     */
-    public function testFilter() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+    public function testFilterBoolean() {
+        $original = "ALTER TABLE `ContainerCategory` 
+ADD COLUMN `containerCategory_contentExpected` BOOLEAN NULL AFTER `containerCategory_defaultSessionDuration`, 
+ADD COLUMN `containerCategory_speakerExpected` BOOLEAN NULL AFTER `containerCategory_contentExpected`;";
+        $filtered = "ALTER TABLE `ContainerCategory` 
+ADD COLUMN `containerCategory_contentExpected` BIT NULL AFTER `containerCategory_defaultSessionDuration`, 
+ADD COLUMN `containerCategory_speakerExpected` BIT NULL AFTER `containerCategory_contentExpected`;";
+        $this->assertEquals($filtered, $this->object->filter($original));
     }
 
 }
