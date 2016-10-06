@@ -28,7 +28,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-namespace CtimtTest\SqlControl\Status;
+namespace CtimtTest\SqlControl\Mocks;
 
 use Ctimt\SqlControl\Status\StatusInterface;
 use PHPUnit_Framework_TestCase;

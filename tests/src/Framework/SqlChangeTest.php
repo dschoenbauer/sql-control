@@ -1,4 +1,4 @@
-<?php namespace CtimtTest\SqlControl\Framework;
+<?php namespace Ctimt\SqlControl\Framework;
 
 use Ctimt\SqlControl\Framework\Attributes;
 use Ctimt\SqlControl\Framework\SqlChange;
