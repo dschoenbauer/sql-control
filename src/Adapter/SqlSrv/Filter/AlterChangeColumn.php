@@ -14,11 +14,12 @@ class AlterChangeColumn extends AbstractAlter {
     }
 
     public function getDataPattern() {
-        return '/CHANGE\s+(\w+)\s+(\w+)\s+([\w\(\)]+)(?:\s+DEFAULT\s+?([\'\"]?[\w\.]+[\'\"]?))?((?:\s+NOT)?\s+NULL)(?:,|$)/im';
+        return '/CHANGE\s+(\w+)\s+(\w+)\s+([\w\(\)]+)(?:\s+DEFAULT\s*([\'\"]?[\w\(\)\.]+[\'\"]?))?((?:\s+NOT)?\s+NULL)?\s*(IDENTITY)?(?:\s+AFTER\s+\w+)?(?:,|$)/im';
     }
 
     public function getSQL($matches, $table) {
-        return sprintf("ALTER TABLE %s ALTER COLUMN %s %s %s", $table, $matches[1], trim($matches[3], ','), trim($matches[5]));
+        $filled = array_merge($matches, array_fill_keys(range(0, 5), null));
+        return sprintf("ALTER TABLE %s ALTER COLUMN %s %s %s", $table, $filled[1], trim($filled[3], ','), trim($filled[5]));
     }
 
     protected function extraCall($matches, $table) {

@@ -67,9 +67,22 @@ CHANGE product_maxContentLifeCycle product_maxDaysBeforeEvent int  DEFAULT 0 NOT
         $this->assertEquals($this->getDefaultStatement('Product', 'product_maxContentLifeCycle', 0), $this->object->getSqlChange()->getStatements()[1]);
         $this->assertEquals($this->getRenameStatement('Product', 'product_maxContentLifeCycle', 'product_maxDaysBeforeEvent'), $this->object->getSqlChange()->getStatements()[2]);
     }
-    
-    
-    
+
+    public function testFilterAfterTagged(){
+        $actual = "ALTER TABLE Venue 
+	CHANGE venue_name venue_name varchar(200)  NULL after venue_id";
+        $expected = "ALTER TABLE Venue ALTER COLUMN venue_name varchar(200) NULL";
+        $this->assertEquals(AlterChangeColumn::SUCCESS_STATENT, $this->object->filter($actual));
+        $this->assertEquals($expected, $this->object->getSqlChange()->getStatements()[0]);
+    }
+
+    public function testFilterParenthesis(){
+        $actual = "ALTER TABLE oauth_access_tokens CHANGE expires expires DATETIME DEFAULT(GETDATE())";
+        $expected = "ALTER TABLE oauth_access_tokens ALTER COLUMN expires DATETIME DEFAULT(GETDATE())";
+        $this->assertEquals(AlterChangeColumn::SUCCESS_STATENT, $this->object->filter($actual));
+        $this->assertEquals($expected, $this->object->getSqlChange()->getStatements()[0]);
+    }
+
     public function getRenameStatement($table, $originalField, $newField){
         return "sp_rename '$table.$originalField', '$newField', 'COLUMN'";;
     }

@@ -1,12 +1,4 @@
-<?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
+<?php namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
 
 use Ctimt\SqlControl\Adapter\FilterInterface;
 use Ctimt\SqlControl\Framework\SqlChange;
@@ -29,7 +21,7 @@ class InsertIdentity implements FilterInterface, SqlChangeAwareInterface {
 
         $table = $matches[1];
         $fields = isset($matches[2]) ? $matches[2] : null;
-        $isIndexInPlayPattern = "/([\( ]id|" . $table . "[_-]?id)/i";
+        $isIndexInPlayPattern = "/(?:^|[,\s])(id|" . $table . "[_-]?id)(?:$|[,\s])/i";
         if (preg_match($isIndexInPlayPattern, $fields) !== 1) {
             return $value;
         }
