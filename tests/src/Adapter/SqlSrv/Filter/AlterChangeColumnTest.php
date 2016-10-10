@@ -78,7 +78,7 @@ CHANGE product_maxContentLifeCycle product_maxDaysBeforeEvent int  DEFAULT 0 NOT
 
     public function testFilterParenthesis(){
         $actual = "ALTER TABLE oauth_access_tokens CHANGE expires expires DATETIME DEFAULT(GETDATE())";
-        $expected = "ALTER TABLE oauth_access_tokens ALTER COLUMN expires DATETIME DEFAULT(GETDATE())";
+        $expected = "ALTER TABLE oauth_access_tokens ALTER COLUMN expires DATETIME ";
         $this->assertEquals(AlterChangeColumn::SUCCESS_STATENT, $this->object->filter($actual));
         $this->assertEquals($expected, $this->object->getSqlChange()->getStatements()[0]);
     }
