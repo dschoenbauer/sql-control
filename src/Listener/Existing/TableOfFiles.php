@@ -1,15 +1,17 @@
 <?php
-namespace Dschoenbauer\SqlControl\Listener\Existing;
+namespace Ctimt\SqlControl\Listener\Existing;
 
-use Dschoenbauer\SqlControl\Components\SqlChangeFactory;
-use Dschoenbauer\SqlControl\Enum\Attributes;
-use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\Enum\Messages;
-use Dschoenbauer\SqlControl\Parser\FileGroup;
-use Dschoenbauer\SqlControl\Parser\FileVersion;
-use Dschoenbauer\SqlControl\Parser\NullParser;
-use Dschoenbauer\SqlControl\SqlControlManager;
-use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
+use Ctimt\SqlControl\Config\Configuration;
+use Ctimt\SqlControl\Enum\Attributes;
+use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Enum\Messages;
+use Ctimt\SqlControl\Enum\Statements;
+use Ctimt\SqlControl\Framework\SqlChangeFactory;
+use Ctimt\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Parser\FileGroup;
+use Ctimt\SqlControl\Parser\FileVersion;
+use Ctimt\SqlControl\Parser\NullParser;
+use Ctimt\SqlControl\Visitor\VisitorInterface;
 use PDO;
 use PDOException;
 use Zend\EventManager\Event;
@@ -22,20 +24,22 @@ use Zend\EventManager\Event;
 class TableOfFiles implements VisitorInterface
 {
 
-    use \Dschoenbauer\SqlControl\Listener\SetupTrait;
+    use \Ctimt\SqlControl\Listener\SetupTrait;
 
     private $_adapter;
     private $_table;
     private $_fieldScriptName;
     private $_fieldSuccess;
+    private $_config;
 
-    public function __construct(\PDO $adapter, $table = 'VersionController', $fieldScriptName = 'VersionController_script', $fieldSuccess = 'VersionController_success')
+    public function __construct(\PDO $adapter, Configuration $config, $table = 'VersionController', $fieldScriptName = 'VersionController_script', $fieldSuccess = 'VersionController_success')
     {
         $this
             ->setAdapter($adapter)
             ->setTable($table)
             ->setFieldScriptName($fieldScriptName)
-            ->setFieldSuccess($fieldSuccess);
+            ->setFieldSuccess($fieldSuccess)
+            ->setConfig($config);
     }
 
     public function visitSqlControlManager(SqlControlManager $sqlControlManager)
@@ -65,7 +69,7 @@ class TableOfFiles implements VisitorInterface
         /* @var $scm SqlControlManager */
         $scm = $event->getTarget();
         $file = $event->getParam('file');
-        $success = (bool) $event->getParam('success');
+        $success = (bool) $event->getParam('success') ? 1 : 0;
         if ($file !== null) {
             $sql = sprintf("INSERT INTO %s (%s, %s) VALUES(:file, :success)", $this->getTable(), $this->getFieldScriptName(), $this->getFieldSuccess());
             $stmt = $scm->getAdapter()->prepare($sql);
@@ -80,7 +84,7 @@ class TableOfFiles implements VisitorInterface
 
     private function getSelectSql()
     {
-        return sprintf("SELECT %s from %s where %s = true", $this->getFieldScriptName(), $this->getTable(), $this->getFieldSuccess());
+        return sprintf($this->getConfig()->getValue(Statements::GET_EXECUTED_CHANGES), $this->getFieldScriptName(), $this->getTable(), $this->getFieldSuccess());
     }
 
     /**
@@ -139,4 +143,18 @@ class TableOfFiles implements VisitorInterface
             return [];
         }
     }
+    
+    /**
+     * 
+     * @return Configuration 
+     */
+    public function getConfig() {
+        return $this->_config;
+    }
+
+    public function setConfig(Configuration $config) {
+        $this->_config = $config;
+        return $this;
+    }
+    
 }

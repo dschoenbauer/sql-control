@@ -1,5 +1,5 @@
 <?php
-namespace Dschoenbauer\SqlControl\Exception;
+namespace Ctimt\SqlControl\Exception;
 
 /**
  * Description of InvalidArgument

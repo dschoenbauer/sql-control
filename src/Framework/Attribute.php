@@ -1,5 +1,5 @@
 <?php
-namespace Dschoenbauer\SqlControl\Components;
+namespace Ctimt\SqlControl\Framework;
 
 /**
  * Description of Attribute

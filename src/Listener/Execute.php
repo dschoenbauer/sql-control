@@ -1,15 +1,15 @@
 <?php
-namespace Dschoenbauer\SqlControl\Listener;
+namespace Ctimt\SqlControl\Listener;
 
-use Dschoenbauer\SqlControl\Components\SqlGroup;
-use Dschoenbauer\SqlControl\Components\SqlChange;
-use Dschoenbauer\SqlControl\Enum\Attributes;
-use Dschoenbauer\SqlControl\Enum\Events;
-use Dschoenbauer\SqlControl\SqlControlManager;
-use Dschoenbauer\SqlControl\Status\Fail;
-use Dschoenbauer\SqlControl\Status\Skipped;
-use Dschoenbauer\SqlControl\Status\Success;
-use Dschoenbauer\SqlControl\Visitor\VisitorInterface;
+use Ctimt\SqlControl\Framework\SqlChange;
+use Ctimt\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Framework\SqlGroup;
+use Ctimt\SqlControl\Enum\Attributes;
+use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Status\Fail;
+use Ctimt\SqlControl\Status\Skipped;
+use Ctimt\SqlControl\Status\Success;
+use Ctimt\SqlControl\Visitor\VisitorInterface;
 use Exception;
 use PDO;
 use Zend\EventManager\Event;
@@ -41,21 +41,21 @@ class Execute implements VisitorInterface
     private function executeGroup(SqlGroup $group, PDO $adapter)
     {
         $versions = $group->getSqlChanges();
-        $noErrors = true;
+        $hasErrors = false;
         /* @var $version SqlChange */
         foreach ($versions as $version) {
             try {
                 if(!$version->getStatus()->isPendingLoad()){
                     continue;
                 }
-                if ($noErrors) {
+                if (!$hasErrors) {
                     $this->executeSql($adapter, $version->getStatements());
                     $version->setStatus(new Success());
                 }else{
                     $version->setStatus(new Skipped());
                 }
             } catch (Exception $exc) {
-                $noErrors = false;
+                $hasErrors = true;
                 $version->setStatus(new Fail());
                 $version->getAttributes()->add('error', ' - ' . $exc->getMessage());
             }
@@ -83,6 +83,7 @@ class Execute implements VisitorInterface
     private function executeSql(\PDO $adapter, $sqls)
     {
         foreach ($sqls as $sql) {
+            echo "$sql",PHP_EOL;
             $adapter->prepare($sql)->execute();
         }
     }

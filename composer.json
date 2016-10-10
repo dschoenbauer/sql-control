@@ -1,28 +1,30 @@
 {
-    "name": "dschoenbauer/sql-control",
+    "name": "ctimt/sql-control",
     "description": "sql version controller",
     "license": "BSD-3-Clause",
     "require": {
-        "php": "^5.5 || ^7.0",
+        "php": "^5.6 || ^7.0",
         "psr/log": "^1.0",
         "zendframework/zend-eventmanager": "^3.0",
         "phing/phing": "2.*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5"
+    },
     "autoload": {
         "psr-4": {
-            "Dschoenbauer\\SqlControl\\": "src/"
+            "Ctimt\\SqlControl\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DschoenbauerTest\\SqlControl\\": "test/",
-            "DschoenbauerBench\\SqlControl\\": "benchmarks/"
+            "CtimtTest\\SqlControl\\": "tests/"
         }
     },
     "authors": [
         {
             "name": "David Schoenbauer",
-            "email": "dschoenbauer@gmail.com"
+            "email": "d.schoenbauer@ctimeetingtech.com"
         }
     ]
 }

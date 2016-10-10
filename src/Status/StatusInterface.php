@@ -1,5 +1,5 @@
 <?php
-
+namespace Ctimt\SqlControl\Status;
 /**
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>

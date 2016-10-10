@@ -1,8 +1,8 @@
 <?php
-namespace Dschoenbauer\SqlControl\Parser;
+namespace Ctimt\SqlControl\Parser;
 
-use Dschoenbauer\SqlControl\Components\SqlChange;
-use Dschoenbauer\SqlControl\Enum\Attributes;
+use Ctimt\SqlControl\Framework\SqlChange;
+use Ctimt\SqlControl\Enum\Attributes;
 
 /**
  * Description of FileSqlStatements
@@ -13,8 +13,12 @@ class FileSqlStatements implements ParseInterface
 {
     public function Parse(SqlChange $sqlChange)
     {
-        $fileContents = trim(file_get_contents($sqlChange->getFullPath()));
+        $fileContents = $this->getFileContents($sqlChange->getFullPath());
         $sqlChange->getAttributes()->add(Attributes::ORIGINAL_SQL_STATEMENT, $fileContents);
         return array_filter(explode(";", $fileContents));
+    }
+    
+    public function getFileContents($fullPath){
+        return trim(file_get_contents($fullPath));
     }
 }
