@@ -34,5 +34,12 @@ class AlterAddIndexTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(AlterAddIndex::SUCCESS_STATENT, $this->object->filter($sql));
         $this->assertEquals($expected, $this->object->getSqlChange()->getStatements()[0]);
     }
+    
+    public function testFilterFullText() {
+        $sql = "ALTER TABLE Redirect ADD FULLTEXT INDEX OneKey (redirect_key); ";
+        $expected = "CREATE FULLTEXT INDEX OneKey ON Redirect (redirect_key)";
+        $this->assertEquals(AlterAddIndex::SUCCESS_STATENT, $this->object->filter($sql));
+        $this->assertEquals($expected, $this->object->getSqlChange()->getStatements()[0]);
+    }
 
 }

@@ -16,11 +16,11 @@ namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
 class AlterAddIndex extends AbstractAlter {
 
     public function getQualifyingPattern() {
-        return '/ALTER\W+TABlE\W+(\w+)[\W\w]+ADD(\s+UNIQUE)?\s+INDEX/i';
+        return '/ALTER\W+TABlE\W+(\w+)[\W\w]+ADD(\s+UNIQUE|\s+FULLTEXT)?\s+INDEX/i';
     }
 
     public function getDataPattern() {
-        return '/ADD(\s+UNIQUE)?\s+INDEX\s+(\w+)\s+\(([\w ,]+)\)/im';
+        return '/ADD(\s+UNIQUE|\s+FULLTEXT)?\s+INDEX\s+(\w+)\s+\(([\w ,]+)\)/im';
     }
 
     public function getSQL($matches, $table) {
