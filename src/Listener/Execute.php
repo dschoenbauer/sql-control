@@ -1,4 +1,5 @@
 <?php
+
 namespace Ctimt\SqlControl\Listener;
 
 use Ctimt\SqlControl\Framework\SqlChange;
@@ -19,18 +20,15 @@ use Zend\EventManager\Event;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class Execute implements VisitorInterface
-{
+class Execute implements VisitorInterface {
 
     private $_sqlControlManager;
 
-    public function visitSqlControlManager(SqlControlManager $sqlControlManager)
-    {
+    public function visitSqlControlManager(SqlControlManager $sqlControlManager) {
         $sqlControlManager->getEventManager()->attach(Events::EXECUTE, [$this, 'onExecute']);
     }
 
-    public function onExecute(Event $event)
-    {
+    public function onExecute(Event $event) {
         $this->setSqlControlManager($event->getTarget());
         $groups = $this->getSqlControlManager()->getAttributes()->getValue(Attributes::GROUPS, []);
         foreach ($groups as $group) {
@@ -38,20 +36,19 @@ class Execute implements VisitorInterface
         }
     }
 
-    private function executeGroup(SqlGroup $group, PDO $adapter)
-    {
+    private function executeGroup(SqlGroup $group, PDO $adapter) {
         $versions = $group->getSqlChanges();
         $hasErrors = false;
         /* @var $version SqlChange */
         foreach ($versions as $version) {
             try {
-                if(!$version->getStatus()->isPendingLoad()){
+                if (!$version->getStatus()->isPendingLoad()) {
                     continue;
                 }
                 if (!$hasErrors) {
                     $this->executeSql($adapter, $version->getStatements());
                     $version->setStatus(new Success());
-                }else{
+                } else {
                     $version->setStatus(new Skipped());
                 }
             } catch (Exception $exc) {
@@ -63,8 +60,7 @@ class Execute implements VisitorInterface
         }
     }
 
-    private function logStatus(SqlChange $sqlChange)
-    {
+    private function logStatus(SqlChange $sqlChange) {
         $message = "{status} - {file}{error}";
         $context = [
             'file' => $sqlChange->getName(),
@@ -73,17 +69,19 @@ class Execute implements VisitorInterface
             'error' => $sqlChange->getAttributes()->getValue('error'),
         ];
         $em = $this
-            ->getSqlControlManager()
-            ->getEventManager();
+                ->getSqlControlManager()
+                ->getEventManager();
 
         $em->trigger(Events::LOG_INFO, $this->getSqlControlManager(), compact('message', 'context'));
         $em->trigger(Events::RESULT, $this->getSqlControlManager(), $context);
     }
 
-    private function executeSql(\PDO $adapter, $sqls)
-    {
+    private function executeSql(\PDO $adapter, $sqls) {
         foreach ($sqls as $sql) {
-            echo "$sql",PHP_EOL;
+            echo "$sql", PHP_EOL;
+            if (strlen(trim($sql)) == 0) {
+                continue;
+            }
             $adapter->prepare($sql)->execute();
         }
     }
@@ -91,14 +89,13 @@ class Execute implements VisitorInterface
     /**
      * @return SqlControlManager
      */
-    public function getSqlControlManager()
-    {
+    public function getSqlControlManager() {
         return $this->_sqlControlManager;
     }
 
-    public function setSqlControlManager($sqlControlManager)
-    {
+    public function setSqlControlManager($sqlControlManager) {
         $this->_sqlControlManager = $sqlControlManager;
         return $this;
     }
+
 }
