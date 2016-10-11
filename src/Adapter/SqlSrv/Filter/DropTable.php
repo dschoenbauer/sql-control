@@ -1,6 +1,4 @@
-<?php
-
-namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
+<?php namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
 
 use Ctimt\SqlControl\Adapter\FilterInterface;
 
