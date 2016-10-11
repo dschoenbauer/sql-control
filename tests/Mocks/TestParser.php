@@ -30,19 +30,20 @@
  */
 namespace CtimtTest\SqlControl\Mocks;
 
+use Ctimt\SqlControl\Framework\SqlChange;
+use PHPUnit_Framework_TestCase;
+
 /**
  * Description of TestParser
  *
  * @author David Schoenbauer
  */
-class TestParser extends \PHPUnit_Framework_TestCase
+class TestParser extends PHPUnit_Framework_TestCase
 {
-
-    const TARGET_CLASS = '\Ctimt\SqlControl\Framework\SqlChange';
 
     protected function getBaseMock()
     {
-        $stub = $this->getMockBuilder(self::TARGET_CLASS)
+        $stub = $this->getMockBuilder(SqlChange::class)
             ->disableOriginalConstructor()
             ->disableOriginalClone()
             ->disableArgumentCloning()
