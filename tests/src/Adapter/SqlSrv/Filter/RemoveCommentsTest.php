@@ -34,4 +34,8 @@ Select * FROM Stuff";
         $this->assertEquals($expected, $this->object->filter($sql));
     }
 
+    public function testNonEmptyFilterForNoMatch(){
+        $actual = "SELECT TEMP_PERMISSIONS.permission_id  FROM TEMP_PERMISSIONS";
+        $this->assertEquals($actual, $this->object->filter($actual));
+    }
 }
