@@ -26,6 +26,7 @@ use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveComments;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveConstraints;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveEngineSpecification;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveFieldByFieldCharType;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveTableComments;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveTick;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RemoveUnsigned;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RepairDelete;
@@ -109,6 +110,7 @@ try {
         new ConverTextEscapeChar(),
         new ConvertHashComments(),
         new RemoveComments(),
+        new RemoveTableComments(),
         new InsertIdentity(),
         new InsertOnDuplicateKey(),
         new AlterDropIndex(),
