@@ -35,7 +35,7 @@ use PDO;
 /**
  * Description of MockPdo
  *
- * @author Bruce Schubert
+ * @author David Schoenbauer
  */
 class MockPdo extends PDO
 {

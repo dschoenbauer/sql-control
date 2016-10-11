@@ -37,7 +37,7 @@ use Ctimt\SqlControl\Adapter\FilterInterface;
 /**
  * Description of RemoveTick
  *
- * @author Bruce Schubert
+ * @author David Schoenbauer
  */
 class RemoveTick implements FilterInterface {
 

@@ -33,7 +33,7 @@ namespace CtimtTest\SqlControl\Mocks;
 /**
  * Description of TestParser
  *
- * @author Bruce Schubert
+ * @author David Schoenbauer
  */
 class TestParser extends \PHPUnit_Framework_TestCase
 {
