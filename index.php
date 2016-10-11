@@ -15,6 +15,7 @@ use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertHashComments;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertInt;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertReplaceInto;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ConvertTimeStamp;
+use Ctimt\SqlControl\Adapter\SqlSrv\Filter\DropTable;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\EscapeKeyWords;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\InsertIdentity;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\InsertOnDuplicateKey;
@@ -116,6 +117,7 @@ try {
         new AlterAddColumn(),
         new AlterAddIndex(),
         new AlterChangeColumn(),
+        new DropTable(),
     ]));
     $controller->accept(new Execute());
     $controller->update();
