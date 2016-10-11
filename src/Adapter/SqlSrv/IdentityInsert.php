@@ -39,7 +39,7 @@ use Zend\EventManager\Event;
 /**
  * Description of IdentityInsert
  *
- * @author Bruce Schubert
+ * @author David Schoenbauer
  */
 class IdentityInsert implements VisitorInterface
 {
