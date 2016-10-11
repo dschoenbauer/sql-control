@@ -15,7 +15,7 @@ use Ctimt\SqlControl\Adapter\FilterInterface;
  *
  * @author David
  */
-class RemoveComments implements FilterInterface{
+class RemoveTableComments implements FilterInterface{
 
     public function filter($value) {
         $pattern = "/COMMENT=[\W\w]+/";
