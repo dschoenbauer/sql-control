@@ -11,7 +11,7 @@ class RemoveComments implements FilterInterface {
 
     public function filter($value) {
         $pattern = '/\/\*[\S\s]*\*\/|^\#.*$/im';
-        return preg_replace($pattern, '', $value);
+        return preg_replace($pattern, '/* */', $value);
     }
 
 }

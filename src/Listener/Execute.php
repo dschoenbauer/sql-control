@@ -84,6 +84,9 @@ class Execute implements VisitorInterface
     {
         foreach ($sqls as $sql) {
             echo "$sql",PHP_EOL;
+            if(strlen(trim($sql))){
+                continue;
+            }
             $adapter->prepare($sql)->execute();
         }
     }

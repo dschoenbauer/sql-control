@@ -21,7 +21,7 @@ class RemoveCommentsTest  extends PHPUnit_Framework_TestCase {
             This is a multi line comment
             */
 Select * FROM Stuff";
-        $expected = "
+        $expected = "/* */
 Select * FROM Stuff";
         $this->assertEquals($expected, $this->object->filter($sql));
     }
@@ -29,7 +29,7 @@ Select * FROM Stuff";
     public function testFilterHashComment(){
         $sql = "#This is a multi line comment
 Select * FROM Stuff";
-        $expected = "
+        $expected = "/* */
 Select * FROM Stuff";
         $this->assertEquals($expected, $this->object->filter($sql));
     }
