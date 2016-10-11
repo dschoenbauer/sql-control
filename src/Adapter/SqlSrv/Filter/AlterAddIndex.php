@@ -13,19 +13,18 @@ namespace Ctimt\SqlControl\Adapter\SqlSrv\Filter;
  *
  * @author David
  */
-class AlterAddIndex extends AbstractAlter{
-    
+class AlterAddIndex extends AbstractAlter {
 
     public function getQualifyingPattern() {
-        return '/ALTER\W+TABlE\W+(\w+)[\W\w]+ADD\W+INDEX/i';
+        return '/ALTER\W+TABlE\W+(\w+)[\W\w]+ADD(\s+UNIQUE|\s+FULLTEXT)?\s+INDEX/i';
     }
-    
+
     public function getDataPattern() {
-        return '/ADD\W+INDEX\W+(\w+)\W+\(([\w ,]+)\)/im';
+        return '/ADD(\s+UNIQUE|\s+FULLTEXT)?\s+INDEX\s+(\w+)\s+\(([\w ,]+)\)/im';
     }
 
     public function getSQL($matches, $table) {
-        return sprintf("CREATE INDEX %s ON %s (%s)", $matches[1], $table, $matches[2]);
+        return sprintf("CREATE%s INDEX %s ON %s (%s)", $matches[1], $matches[2], $table, $matches[3]);
     }
 
 }
