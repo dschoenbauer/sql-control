@@ -8,5 +8,5 @@ namespace Ctimt\SqlControl\Listener\Logger;
  */
 interface LogBuilderInterface
 {
-    public function buildLogger();
+    public function getLogger(Logger $logger = null);
 }

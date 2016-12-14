@@ -1,9 +1,12 @@
 <?php
+
 namespace Ctimt\SqlControl\Listener;
 
 use Ctimt\SqlControl\Enum\Attributes;
 use Ctimt\SqlControl\Enum\Events;
+use Ctimt\SqlControl\Enum\OutputMessages;
 use Ctimt\SqlControl\Framework\SqlControlManager;
+use Ctimt\SqlControl\Listener\Logger\Logger;
 use Ctimt\SqlControl\Visitor\VisitorInterface;
 use Exception;
 use PDO;
@@ -14,63 +17,60 @@ use Zend\EventManager\Event;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class Connection implements VisitorInterface
-{
+class Connection implements VisitorInterface {
 
-    use SetupTrait;    
+    use SetupTrait;
+
     private $_connection;
     private $_targetDatabaseName = null;
-    
-    public function __construct($connection,$targetDatabaseName)
-    {
+
+    public function __construct($connection, $targetDatabaseName) {
         $this
-            ->setConnection($connection)
-            ->setTargetDatabaseName($targetDatabaseName);
+                ->setConnection($connection)
+                ->setTargetDatabaseName($targetDatabaseName);
+
         $this->getConnection()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-    
-    public function visitSqlControlManager(SqlControlManager $sqlControlManager)
-    {
+
+    public function visitSqlControlManager(SqlControlManager $sqlControlManager) {
         $sqlControlManager->getAttributes()->add(Attributes::TARGET_DATABASE, $this->getTargetDatabaseName());
-        $sqlControlManager->getEventManager()->attach(Events::LOAD, [$this,'onLoad']);
+        $sqlControlManager->getEventManager()->attach(Events::LOAD, [$this, 'onLoad']);
+        $context = ['message' => 'Database: {database}',
+            'database' => $this->getTargetDatabaseName()];
+        $sqlControlManager->getEventManager()->trigger(Events::LOG_DEBUG, $sqlControlManager, Logger::Message($sqlControlManager->getAttributes()->getAttribute(OutputMessages::INFO, $sqlControlManager), $context));
     }
-    
-    public function onLoad(Event $event){
+
+    public function onLoad(Event $event) {
         try {
             $sql = sprintf("USE %s", $this->getTargetDatabaseName());
             $event->getTarget()
-                ->setAdapter($this->getConnection())
-                ->getAdapter()->exec($sql);
+                    ->setAdapter($this->getConnection())
+                    ->getAdapter()->exec($sql);
         } catch (Exception $exc) {
             $this->setup($exc, $event->getTarget());
-            $event->getTarget()->getEventManager()->trigger(Events::CLEAR,$event->getTarget(),['events'=>[Events::LOAD]]);
+            $event->getTarget()->getEventManager()->trigger(Events::CLEAR, $event->getTarget(), ['events' => [Events::LOAD]]);
         }
     }
 
     /**
      * @return PDO
      */
-    public function getConnection()
-    {
+    public function getConnection() {
         return $this->_connection;
     }
 
-    public function setConnection($connection)
-    {
+    public function setConnection($connection) {
         $this->_connection = $connection;
         return $this;
     }
-    
-    public function getTargetDatabaseName()
-    {
+
+    public function getTargetDatabaseName() {
         return $this->_targetDatabaseName;
     }
 
-    public function setTargetDatabaseName($targetDatabaseName)
-    {
+    public function setTargetDatabaseName($targetDatabaseName) {
         $this->_targetDatabaseName = $targetDatabaseName;
         return $this;
     }
-
 
 }

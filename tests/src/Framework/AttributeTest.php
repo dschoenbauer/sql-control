@@ -43,4 +43,13 @@ class AttributeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("value", $this->object->getValue());
     }
 
+    public function testToString(){
+        $this->assertEquals("value", $this->object);
+    }
+    
+    public function testToStringArray(){
+        $this->assertNull($this->object->setValue([])->__toString());
+    }
+    
+    
 }

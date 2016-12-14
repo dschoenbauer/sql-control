@@ -35,11 +35,12 @@ use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ReplaceIf;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\ReplaceNow;
 use Ctimt\SqlControl\Adapter\SqlSrv\Filter\RewiteIndexStatements;
 use Ctimt\SqlControl\Adapter\SqlSrv\IdentityInsert;
-use Ctimt\SqlControl\Config\Configuration;
+use Ctimt\SqlControl\Config\ConfigurationFactory;
 use Ctimt\SqlControl\Enum\Events;
 use Ctimt\SqlControl\Enum\Statements;
 use Ctimt\SqlControl\Framework\SqlControlManager;
 use Ctimt\SqlControl\Listener\Clear;
+use Ctimt\SqlControl\Listener\ConfigToAttribute;
 use Ctimt\SqlControl\Listener\Connection;
 use Ctimt\SqlControl\Listener\DepreciationManager;
 use Ctimt\SqlControl\Listener\Execute;
@@ -47,19 +48,22 @@ use Ctimt\SqlControl\Listener\Existing\TableOfFiles;
 use Ctimt\SqlControl\Listener\Filter;
 use Ctimt\SqlControl\Listener\Grouper;
 use Ctimt\SqlControl\Listener\Loader\SqlFiles;
-use Ctimt\SqlControl\Listener\Logger\LogBuilder;
+use Ctimt\SqlControl\Listener\Logger\DebugLogBuilder;
 use Ctimt\SqlControl\Listener\Logger\LogBuilderDirector;
+use Ctimt\SqlControl\Listener\Logger\Logger;
+use Ctimt\SqlControl\Listener\Logger\ToScreen;
 use Ctimt\SqlControl\Listener\LogManager;
+use Ctimt\SqlControl\Listener\MessageSetupTearDown;
 use Ctimt\SqlControl\Listener\SetupDatabase;
 use Ctimt\SqlControl\Listener\SetupTable;
 use Ctimt\SqlControl\Listener\SortGroup;
 use Ctimt\SqlControl\Listener\SortVersion;
+use Psr\Log\LogLevel;
 
 include './vendor/autoload.php';
 try {
     $database = "springs_local_" . time();
-    echo "<pre>",$database;
-    
+
     $table = 'VersionController';
     $fieldScriptName = 'VersionController_script';
     $fieldSuccess = 'VersionController_success';
@@ -67,20 +71,24 @@ try {
     $connection = new PDO('sqlsrv:Server=CTT-DSCHOEN\\SQLEXPRESS;Database=springs_local', 'admin', 'admin');
 
 
-    $logDirector = new LogBuilderDirector(new LogBuilder());
 
-    $config = new Configuration(include 'src/Config/config.php', $connection->getAttribute(PDO::ATTR_DRIVER_NAME));
+    $logDirector = new LogBuilderDirector(new DebugLogBuilder([LogLevel::INFO, LogLevel::ERROR, LogLevel::WARNING], new ToScreen()));
+
+    $configFactory = new ConfigurationFactory();
+    $sqlConfig = $configFactory->makeSqlStatementConfiguration($connection);
 
     $controller = new SqlControlManager();
-    $controller->accept(new Connection($connection, $database));
+    $controller->accept(new MessageSetupTearDown());
     $controller->accept(new Clear());
     $controller->accept(new IdentityInsert());
-    $controller->accept(new SetupDatabase($database, $config));
-    $controller->accept(new SetupTable($table, $fieldScriptName, $fieldSuccess, $config));
+    $controller->accept(new SetupDatabase($database, $sqlConfig));
+    $controller->accept(new SetupTable($table, $fieldScriptName, $fieldSuccess, $sqlConfig));
+    $controller->accept(new Connection($connection, $database));
+    $controller->accept(new ConfigToAttribute($configFactory->makeOutputMessageConfiguration()));
 
     $controller->accept(new LogManager([$logDirector->buildLogger()]));
     $controller->accept(new SqlFiles('c:/users/david/Documents/Source/meeting-springs/data/Schema/Inc/'));
-    $controller->accept(new TableOfFiles($connection, $config, $table, $fieldScriptName, $fieldSuccess));
+    $controller->accept(new TableOfFiles($connection, $sqlConfig, $table, $fieldScriptName, $fieldSuccess));
     $controller->accept(new Grouper());
     $controller->accept(new DepreciationManager());
     $controller->accept(new SortVersion());
@@ -100,7 +108,7 @@ try {
         new ManageVarcharMax(),
         new ReplaceNow(),
         new ReplaceIf(),
-        new EscapeKeyWords($config->getValue(Statements::RESERVED_WORDS)),
+        new EscapeKeyWords($sqlConfig->getValue(Statements::RESERVED_WORDS)),
         new ManageCreateKeys(),
         new RemoveEngineSpecification(),
         new RemoveFieldByFieldCharType(),
@@ -124,6 +132,5 @@ try {
     $controller->accept(new Execute());
     $controller->update();
 } catch (Exception $exc) {
-    echo $exc->getCode(), PHP_EOL, $exc->getMessage(), PHP_EOL, $exc->getTraceAsString();
-    $controller->getEventManager()->trigger(Events::LOG_ERROR, $controller, ['message' => 'Epic Error:{message}', 'context' => ['message' => $exc->getMessage()]]);
+    $controller->getEventManager()->trigger(Events::LOG_ERROR, Logger::Message('Epic Error:{message}', ['message' => $exc->getMessage()]));
 }

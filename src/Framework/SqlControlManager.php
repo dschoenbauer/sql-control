@@ -60,9 +60,11 @@ class SqlControlManager implements VisiteeInterface
 
     public function update()
     {
+        $this->getEventManager()->trigger(Events::SETUP, $this);
         $this->getEventManager()->trigger(Events::LOAD, $this);
         $this->getEventManager()->trigger(Events::PREPARE, $this);
         $this->getEventManager()->trigger(Events::EXECUTE, $this);
+        $this->getEventManager()->trigger(Events::TEAR_DOWN, $this);
     }
 
 }
