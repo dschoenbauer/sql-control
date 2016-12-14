@@ -35,7 +35,7 @@ class Attributes
     public function getAttribute($key, $defaultValue = null)
     {
         if (!array_key_exists($key, $this->_attributes)) {
-            return new Attribute($key, $defaultValue);
+            $this->add($key, $defaultValue);
         }
         return $this->_attributes[$key];
     }

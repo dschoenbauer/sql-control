@@ -8,11 +8,13 @@ namespace Ctimt\SqlControl\Enum;
  */
 class Events
 {
+    const SETUP = "setup";
     const CLEAR = "clear";
     const LOAD = 'load';
     const PREPARE = 'prepare';
     const EXECUTE = 'execute';
     const RESULT = "result";
+    const TEAR_DOWN = "tear_down";
     
     const SETUP_TABLE = "setup_table";
     const SETUP_DATABASE = "setup_database";

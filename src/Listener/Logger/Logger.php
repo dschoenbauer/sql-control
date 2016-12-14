@@ -1,4 +1,5 @@
 <?php
+
 namespace Ctimt\SqlControl\Listener\Logger;
 
 /**
@@ -6,15 +7,17 @@ namespace Ctimt\SqlControl\Listener\Logger;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class Logger implements \Psr\Log\LoggerInterface
-{
+class Logger implements \Psr\Log\LoggerInterface {
 
     use LoggerLevelValidateTrait;
 
-use \Psr\Log\LoggerTrait;
+    use \Psr\Log\LoggerTrait;
 
-    public function __construct(array $outputs = [])
-    {
+    public function __construct(array $outputs = []) {
+        $this->load($outputs);
+    }
+
+    public function load($outputs) {
         foreach ($outputs as $level => $logOutputs) {
             $this->validateLogLevel($level);
             if (is_array($logOutputs)) {
@@ -22,20 +25,19 @@ use \Psr\Log\LoggerTrait;
                     $this->add($level, $logOutput);
                 }
             } else {
-                $this->add($level, $logOutput);
+                $this->add($level, $logOutputs);
             }
         };
+        return $this;
     }
 
-    public function add($level, LoggerOutputInterface $logOutput)
-    {
+    public function add($level, LoggerOutputInterface $logOutput) {
         $this->validateLogLevel($level);
         $this->_outputs[$level][] = $logOutput;
         return $this;
     }
 
-    public function log($level, $message, array $context = array())
-    {
+    public function log($level, $message, array $context = array()) {
         $this->validateLogLevel($level);
         if (!array_key_exists($level, $this->_outputs)) {
             return; //Nothing to do
@@ -48,8 +50,7 @@ use \Psr\Log\LoggerTrait;
         }
     }
 
-    public function interpolate($message, array $context = array())
-    {
+    public function interpolate($message, array $context = array()) {
         $replace = array();
         foreach ($context as $key => $val) {
             // check that the value can be casted to string
@@ -57,6 +58,11 @@ use \Psr\Log\LoggerTrait;
                 $replace['{' . $key . '}'] = $val;
             }
         }
-        return strtr($message, $replace);
+        return strtr($message ?: "", $replace);
     }
+
+    public static function Message($message, array $context = []) {
+        return compact('message', 'context');
+    }
+
 }

@@ -13,5 +13,6 @@ class Attributes
     const SQL_VERSIONS = "sqlChanges";
     const APPLIED_SQL_VERSIONS = "appliedSqlChanges";
     const GROUPS = "groups";
+    const MESSAGES = "messages";
 
 }

@@ -29,10 +29,15 @@ class Configuration {
         $this->setConfig($config)->setNameSpace($nameSpace)->setThrowErrorOnNoValue($throwErrorOnNoValue);
     }
 
-    public function getValue($key, $defaultValue = null) {
+    public function getProcessedConfig(){
         $defaultConfig = array_key_exists($this->getDefaultNamespace(), $this->getConfig()) ? $this->getConfig()[$this->getDefaultNamespace()] : [];
         $currentNamespace = array_key_exists($this->getNameSpace(), $this->getConfig()) ? $this->getConfig()[$this->getNameSpace()] : [];
-        $config = array_merge_recursive($currentNamespace,$defaultConfig);
+        return array_merge_recursive($currentNamespace,$defaultConfig);
+    }
+
+
+    public function getValue($key, $defaultValue = null) {
+        $config = $this->getProcessedConfig();
         if(array_key_exists($key, $config)){
             return $config[$key];
         }elseif($this->getThrowErrorOnNoValue()){

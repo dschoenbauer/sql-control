@@ -17,7 +17,7 @@ class LogBuilderDirector
     }
 
     public function buildLogger(){
-        return $this->getBuilder()->buildLogger();
+        return $this->getBuilder()->getLogger();
     }
 
 
